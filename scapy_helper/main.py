@@ -1,3 +1,4 @@
+from scapy.layers.inet import IP
 from scapy.utils import chexdump
 
 
@@ -36,17 +37,37 @@ def show_hex(frame):
     print(get_hex(frame))
 
 
-def show_diff(first, second):
+def show_diff(first, second, extend=False):
     first_row, second_row, status = _diff(first, second)
 
     print(' '.join(first_row))
     print(' '.join(second_row))
+
+    if extend:
+        more_info = []
+        for types in first.class_fieldtype.items():
+            for el in types[1].items():
+                more_info.append((el[0], el[1].sz))
+        print(more_info)
+
     if status:
         print("Ok")
     else:
         print("Not equal at {} point/s".format(len([x for x in first_row if x != "__"])))
 
+
 def get_diff(first, second):
     _, _, status = _diff(first, second)
     return status
-     
+
+
+def table(first, second):
+    f, s, status = _diff(first, second)
+    show_diff(first, second)
+    f_details = first.show(dump=True).split("\n")
+    s_details = second.show(dump=True).split("\n")
+
+    for r in range(len(f_details)):
+        print("{} {:>40}".format(f_details[r], s_details[r]))
+
+    return status
