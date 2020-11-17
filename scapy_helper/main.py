@@ -1,16 +1,7 @@
-from scapy.layers.l2 import Ether
 from scapy.utils import chexdump
 
 
-def get_hex(frame):
-    return ' '.join([x.replace("0x", "").replace(",", "") for x in chexdump(frame, dump=True).split()])
-
-
-def show_hex(frame):
-    print(get_hex(frame))
-
-
-def show_diff(first, second):
+def _diff(first, second):
     if not isinstance(first, str):
         first = get_hex(first)
     if isinstance(first, str):
@@ -33,13 +24,24 @@ def show_diff(first, second):
             continue
         first_row.append("__")
         second_row.append("__")
+    status = first_row == second_row
+    return first_row, second_row, status
+
+
+def get_hex(frame):
+    return ' '.join([x.replace("0x", "").replace(",", "") for x in chexdump(frame, dump=True).split()])
+
+
+def show_hex(frame):
+    print(get_hex(frame))
+
+
+def show_diff(first, second):
+    first_row, second_row, status = _diff(first, second)
 
     print(' '.join(first_row))
     print(' '.join(second_row))
-
-
-if __name__ == "__main__":
-    show_hex(Ether())
-
-    ether_wrong = "ff ff fc ff ff fa e0 d5 5e e6 6c 8e 90 00"
-    show_diff(Ether(), ether_wrong)
+    if status:
+        print("Ok")
+    else:
+        print("Not equal at {} point/s".format(len([x for x in first_row if x != "__"])))
