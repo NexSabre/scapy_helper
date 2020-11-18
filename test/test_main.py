@@ -5,7 +5,7 @@ from scapy.layers.l2 import Ether
 from scapy_helper.main import get_hex, _diff
 
 
-class TestScapyHelper(TestCase):
+class Test_Scapy_Helper(TestCase):
     def setUp(self) -> None:
         self.ether = Ether()
 

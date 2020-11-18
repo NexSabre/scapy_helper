@@ -45,3 +45,8 @@ def show_diff(first, second):
         print("Ok")
     else:
         print("Not equal at {} point/s".format(len([x for x in first_row if x != "__"])))
+
+def get_diff(first, second):
+    _, _, status = _diff(first, second)
+    return status
+     
