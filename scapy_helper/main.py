@@ -1,4 +1,3 @@
-from scapy.layers.inet import IP
 from scapy.utils import chexdump
 
 
