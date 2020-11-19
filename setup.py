@@ -9,10 +9,9 @@ setup(
     url="https://github.com/NexSabre/scapy_helper",
     packages=find_packages(),
     classifiers=[
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=["scapy"]
+    install_requires=["scapy==2.4.4", "tabulate==0.8.4"]
 )

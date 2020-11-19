@@ -14,4 +14,4 @@ class TestCompare(unittest.TestCase):
 
     def test_one(self):
         compare = Compare(self.ether, self.c_ether)
-        compare.diff()
+        compare.table_diff()
