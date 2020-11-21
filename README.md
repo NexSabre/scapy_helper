@@ -16,7 +16,7 @@ ff ff ff ff ff ff 00 00 00 00 00 00 90 00
 
 # Show the differences
 #   can be result of get_hex() or string or frame
->>> second_ether = "ff ff fc ff ff fa e0 d5 5e e6 6c 8e 90 00 11 11 00 22" 
+>>> second_ether = "ff ff fc ff ff fa 00 00 00 00 00 00 90 00 11 11 00 22" 
 >>> show_diff(Ether(), second_ether)
 WARN:: Frame len is not the same
 WARN:: Second row is longer by the 4B
