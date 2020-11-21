@@ -8,20 +8,21 @@ from scapy_helper.main import _diff
 
 class TestScapyHelper(TestCase):
     def setUp(self) -> None:
-        self.ether = Ether(src="ff:ff:ff:ff:ff:ff",
-                           dst="00:00:00:00:00:00")
+        self.ether = Ether(dst="ff:ff:ff:ff:ff:ff",
+                           src="00:00:00:00:00:00")
 
     def test_get_hex(self):
         assert get_hex(self.ether) == "ff ff ff ff ff ff 00 00 00 00 00 00 90 00"
 
     def test_show_diff(self):
-        ether_wrong = "ff ff ff ff ff ff 00 00 00 00 00 00 90 00"
+        ether_wrong = "ff ff ff ff ff ff 00 00 00 00 aa 00 90 00"
         first_row, second_row, status = _diff(self.ether, ether_wrong)
+
         self.assertEqual(first_row,
-                         ['__', '__', 'ff', '__', '__', 'ff', '__', '__', '__', '__', '__', '__', '__', '__'])
+                         "__ __ __ __ __ __ __ __ __ __ 00 __ __ __".split())
         self.assertEqual(second_row,
-                         ['__', '__', 'fc', '__', '__', 'fa', '__', '__', '__', '__', '__', '__', '__', '__'])
-        self.assertIsNotNone(status)
+                         "__ __ __ __ __ __ __ __ __ __ aa __ __ __".split())
+        self.assertFalse(status)
 
     def test_show_more_diff(self):
         show_diff(self.ether, "ff ff ff ff ff ff 00 00 00 00 00 00 90 00")

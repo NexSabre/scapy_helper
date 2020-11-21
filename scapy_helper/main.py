@@ -1,32 +1,13 @@
 from scapy.utils import chexdump
 
-from scapy_helper._helpers.depracated import deprecated
+from scapy_helper.helpers.depracated import deprecated
 
 
 def _diff(first, second):
-    if not isinstance(first, str):
-        first = get_hex(first)
-    if isinstance(first, str):
-        first = first.split()
+    first = _prepare(first)
+    second = _prepare(second)
 
-    if not isinstance(second, str):
-        second = get_hex(second)
-    if isinstance(second, str):
-        second = second.split()
-
-    if len(first) != len(second):
-        print("WARN:: Frame len is not the same")
-
-        len_first = len(first)
-        len_second = len(second)
-        if len_first > len_second:
-            print("WARN:: First row is longer by the %sB\n" % (len_first - len_second))
-            for x in range(len_first - len_second):
-                second.append("  ")
-        else:
-            print("WARN:: Second row is longer by the %sB\n" % (len_second - len_first))
-            for x in range(len_second - len_first):
-                first.append("  ")
+    _fill_empty_elements(first, second)
 
     first_row = []
     second_row = []
@@ -41,6 +22,30 @@ def _diff(first, second):
     return first_row, second_row, status
 
 
+def _fill_empty_elements(first, second):
+    if len(first) != len(second):
+        print("WARN:: Frame len is not the same")
+
+        len_first = len(first)
+        len_second = len(second)
+        if len_first > len_second:
+            print("WARN:: First row is longer by the %sB\n" % (len_first - len_second))
+            for x in range(len_first - len_second):
+                second.append("  ")
+        else:
+            print("WARN:: Second row is longer by the %sB\n" % (len_second - len_first))
+            for x in range(len_second - len_first):
+                first.append("  ")
+
+
+def _prepare(obj):
+    if not isinstance(obj, str):
+        obj = get_hex(obj)
+    if isinstance(obj, str):
+        obj = obj.split()
+    return obj
+
+
 def get_hex(frame):
     return ' '.join([x.replace("0x", "").replace(",", "") for x in chexdump(frame, dump=True).split()])
 
@@ -52,15 +57,15 @@ def show_hex(frame):
 def show_diff(first, second, extend=False, empty_char="XX"):
     first_row, second_row, status = _diff(first, second)
 
-    first_row_len_B = len([x for x in first_row if x != "  "])
-    second_row_len_B = len([x for x in second_row if x != "  "])
+    first_row_len_b = len([x for x in first_row if x != "  "])
+    second_row_len_b = len([x for x in second_row if x != "  "])
 
     for e in range(len(first_row)):
         first_row[e] = first_row[e].replace("  ", empty_char)
         second_row[e] = second_row[e].replace("  ", empty_char)
 
-    print(' '.join(first_row), "| len: %sB" % first_row_len_B)
-    print(' '.join(second_row), "| len: %sB" % second_row_len_B)
+    print(' '.join(first_row), "| len: %sB" % first_row_len_b)
+    print(' '.join(second_row), "| len: %sB" % second_row_len_b)
 
     if extend:
         more_info = []
