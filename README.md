@@ -1,3 +1,4 @@
+![Test](https://github.com/NexSabre/scapy_helper/workflows/Test/badge.svg?branch=master)   ![CodeQL](https://github.com/NexSabre/scapy_helper/workflows/CodeQL/badge.svg?branch=master)
 # Scapy helper
 Several features that should help you use Scapy.
 
