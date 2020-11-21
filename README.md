@@ -28,8 +28,6 @@ Not equal at 11B
 
 # You can add a index to it
 >>> show_diff(Ehter(), second_ether, index=True)
-WARN:: Frame len is not the same
-WARN:: Second row is longer by the 4B
 
 __ __ ff __ __ ff __ 00 00 00 00 00 __ __ XX XX XX XX | len: 14B
 __ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
@@ -37,6 +35,15 @@ __ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
       ^2       ^5    ^7 ^8 ^9 10 11       14 15 16 17 | position
 
 Not equal at 11B
+
+# You can add a custom char to mark a missing elements
+>> show_diff(ether_1, ether_2, index=True, empty_char="++")
+
+__ __ ff __ __ ff __ 00 00 00 00 00 __ __ ++ ++ ++ ++ | len: 14B
+__ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
+                                                      |
+      ^2       ^5    ^7 ^8 ^9 10 11       14 15 16 17 | position
+
 ```
 
 ## Compare
