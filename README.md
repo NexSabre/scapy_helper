@@ -2,7 +2,7 @@
 Several features that should help you use Scapy.
 
 ## TL;DR
-```python
+```text
 >>> from scapy_helper import *
 >>> e = Ether() # Scapy Ether
 
