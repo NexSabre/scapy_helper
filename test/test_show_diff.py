@@ -22,3 +22,9 @@ class TestShowDiff(TestCase):
         ether_2 = "ff ff fc ff ff fa 00 11 11 11 11 11 90 00 11 11 00 22"
 
         show_diff(ether_1, ether_2)
+
+    def test_show_diff_with_indexes(self):
+        ether_1 = Ether(src="00:00:00:00:00:00")
+        ether_2 = "ff ff fc ff ff fa 00 11 11 11 11 11 90 00 11 11 00 22"
+
+        show_diff(ether_1, ether_2, index=True)

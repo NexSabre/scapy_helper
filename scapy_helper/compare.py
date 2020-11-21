@@ -9,9 +9,7 @@ class Compare:
         self.second = second
 
     def hex(self):
-        v = get_hex(self.first)
-        show_hex(v)
-        return v
+        return get_hex(self.first), get_hex(self.second)
 
     def diff(self):
         print("This is temporary -- will be changed in the future")
@@ -20,7 +18,7 @@ class Compare:
     def tdiff(self):
         self.table_diff()
 
-    def table_diff(self):
+    def table_diff(self, index=False):
         def prepare_data(first, second):
             if "=" in first and "=" in second:
                 column_a = first.split("=")
@@ -31,14 +29,14 @@ class Compare:
                 return None, column_a[0], column_a[1], column_b[1]
             return first, None, None, None
 
-        f, s, status = _diff(self.first, self.second)
-        show_diff(self.first, self.second)
+        status = show_diff(self.first, self.second)
+        self._print_table(prepare_data)
+        return status
+
+    def _print_table(self, prepare_data):
         f_details = self.first.show(dump=True).split("\n")
         s_details = self.second.show(dump=True).split("\n")
-
         data = [("Diff or header", "Element", "First", "Second")]
         for r in range(len(f_details)):
             data.append(prepare_data(f_details[r], s_details[r]))
-
         print(tabulate(data, headers="firstrow", tablefmt="github"))
-        return status

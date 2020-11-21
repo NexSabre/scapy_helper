@@ -11,15 +11,16 @@ def _diff(first, second):
 
     first_row = []
     second_row = []
+    diff_indexes = []
     for e, _ in enumerate(first):
         if first[e].lower() != second[e].lower():
             first_row.append(first[e])
             second_row.append(second[e])
+            diff_indexes.append(e)
             continue
         first_row.append("__")
         second_row.append("__")
-    status = first_row == second_row
-    return first_row, second_row, status
+    return first_row, second_row, diff_indexes
 
 
 def _fill_empty_elements(first, second):
@@ -54,18 +55,35 @@ def show_hex(frame):
     print(get_hex(frame))
 
 
-def show_diff(first, second, extend=False, empty_char="XX"):
-    first_row, second_row, status = _diff(first, second)
+def _create_diff_indexes_list(indexes):
+    new_list = []
+    for x in range(max(indexes) + 1):
+        new_list.append("  ")
+    for idx in indexes:
+        if idx < 10:
+            new_list[idx] = str("^%s" % idx)
+        else:
+            new_list[idx] = str(idx)
+    new_list.append("| position")
+    return ' '.join(new_list)
 
-    first_row_len_b = len([x for x in first_row if x != "  "])
-    second_row_len_b = len([x for x in second_row if x != "  "])
 
-    for e in range(len(first_row)):
-        first_row[e] = first_row[e].replace("  ", empty_char)
-        second_row[e] = second_row[e].replace("  ", empty_char)
+def show_diff(first, second, index=False, extend=False, empty_char="XX"):
+    first_row, second_row, indexes_of_diff = _diff(first, second)
+    first_row_len_bytes = count_bytes(first_row)
+    second_row_len_bytes = count_bytes(second_row)
 
-    print(' '.join(first_row), "| len: %sB" % first_row_len_b)
-    print(' '.join(second_row), "| len: %sB" % second_row_len_b)
+    for row in (first_row, second_row):
+        for idx, element in enumerate(row):
+            if element == "  ":
+                row[idx] = empty_char
+
+    print(' '.join(first_row), "| len: %sB" % first_row_len_bytes)
+    print(' '.join(second_row), "| len: %sB" % second_row_len_bytes)
+    if index and indexes_of_diff:
+        str_bar = "   " * first_row_len_bytes if first_row_len_bytes > second_row_len_bytes else \
+            "   " * second_row_len_bytes
+        print("%s|\n%s" % (str_bar, _create_diff_indexes_list(indexes_of_diff)))
 
     if extend:
         more_info = []
@@ -75,15 +93,25 @@ def show_diff(first, second, extend=False, empty_char="XX"):
         print(more_info)
 
     print()
-    if status:
-        print("Ok")
+    if indexes_of_diff:
+        print("Not equal at {}B".format(len([x for x in first_row if x != "__"])))
+        return False
     elif len([x for x in first_row if x != "__"]) == len(first_row):
         print("Not equal")
-    else:
-        print("Not equal at {}B".format(len([x for x in first_row if x != "__"])))
+        return False
+    print("Ok")
+    return True
 
 
-def get_diff(first, second):
+def count_bytes(packet_hex_list):
+    return len([x for x in packet_hex_list if x != "  "])
+
+
+def get_diff(*args):
+    raise NotImplementedError
+
+
+def get_diff_status(first, second):
     _, _, status = _diff(first, second)
     return status
 

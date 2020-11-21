@@ -8,10 +8,11 @@ Several features that should help you use Scapy.
 
 # Dump frame hex
 >>> hex = get_hex(e)
+'ff ff ff ff ff ff 00 00 00 00 00 00 90 00'
 
 # Convert and print 
 >>> show_hex(e)
-ff ff ff ff ff ff e0 d5 5e e6 6c 8e 90 00
+ff ff ff ff ff ff 00 00 00 00 00 00 90 00
 
 # Show the differences
 #   can be result of get_hex() or string or frame
@@ -22,6 +23,18 @@ WARN:: Second row is longer by the 4B
 
 __ __ ff __ __ ff __ 00 00 00 00 00 __ __ XX XX XX XX | len: 14B
 __ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
+
+Not equal at 11B
+
+# You can add a index to it
+>>> show_diff(Ehter(), second_ether, index=True)
+WARN:: Frame len is not the same
+WARN:: Second row is longer by the 4B
+
+__ __ ff __ __ ff __ 00 00 00 00 00 __ __ XX XX XX XX | len: 14B
+__ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
+                                                      |
+      ^2       ^5    ^7 ^8 ^9 10 11       14 15 16 17 | position
 
 Not equal at 11B
 ```

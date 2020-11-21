@@ -22,6 +22,16 @@ class TestScapyHelper(TestCase):
                          "__ __ __ __ __ __ __ __ __ __ 00 __ __ __".split())
         self.assertEqual(second_row,
                          "__ __ __ __ __ __ __ __ __ __ aa __ __ __".split())
+        self.assertTrue(status)
+        self.assertEqual(status, [10, ])
+
+    def test_show_diff_for_same_elements(self):
+        first_row, second_row, status = _diff(self.ether, self.ether)
+
+        self.assertEqual(first_row,
+                         "__ __ __ __ __ __ __ __ __ __ __ __ __ __".split())
+        self.assertEqual(second_row,
+                         "__ __ __ __ __ __ __ __ __ __ __ __ __ __".split())
         self.assertFalse(status)
 
     def test_show_more_diff(self):
