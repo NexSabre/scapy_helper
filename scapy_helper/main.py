@@ -95,12 +95,12 @@ def show_diff(first, second, index=False, extend=False, empty_char="XX"):
     print()
     if indexes_of_diff:
         print("Not equal at {}B".format(len([x for x in first_row if x != "__"])))
-        return False
+        return True
     elif len([x for x in first_row if x != "__"]) == len(first_row):
         print("Not equal")
-        return False
+        return True
     print("Ok")
-    return True
+    return False
 
 
 def count_bytes(packet_hex_list):

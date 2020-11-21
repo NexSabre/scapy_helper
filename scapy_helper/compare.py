@@ -8,7 +8,18 @@ class Compare:
         self.first = first
         self.second = second
 
+    def equal(self):
+        """
+        Return true if booth elements are equal
+        :return: bool
+        """
+        return not self.diff()
+
     def hex(self):
+        """
+        Return tuple with hex elements
+        :return: Tuple(str, str)
+        """
         return get_hex(self.first), get_hex(self.second)
 
     def diff(self):

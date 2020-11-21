@@ -29,3 +29,6 @@ class TestCompare(unittest.TestCase):
 
     def test_diff(self):
         self.assertTrue(self.compare.diff(), "diff() should return a difference")
+
+    def test_equal(self):
+        self.assertFalse(self.compare.eqaul(), "eqaul() should return false")
