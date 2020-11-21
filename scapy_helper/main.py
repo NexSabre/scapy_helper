@@ -1,5 +1,7 @@
 from scapy.utils import chexdump
 
+from scapy_helper._helpers.depracated import deprecated
+
 
 def _diff(first, second):
     if not isinstance(first, str):
@@ -15,10 +17,21 @@ def _diff(first, second):
     if len(first) != len(second):
         print("WARN:: Frame len is not the same")
 
+        len_first = len(first)
+        len_second = len(second)
+        if len_first > len_second:
+            print("WARN:: First row is longer by the %sB\n" % (len_first - len_second))
+            for x in range(len_first - len_second):
+                second.append("  ")
+        else:
+            print("WARN:: Second row is longer by the %sB\n" % (len_second - len_first))
+            for x in range(len_second - len_first):
+                first.append("  ")
+
     first_row = []
     second_row = []
     for e, _ in enumerate(first):
-        if first[e] != second[e]:
+        if first[e].lower() != second[e].lower():
             first_row.append(first[e])
             second_row.append(second[e])
             continue
@@ -36,11 +49,18 @@ def show_hex(frame):
     print(get_hex(frame))
 
 
-def show_diff(first, second, extend=False):
+def show_diff(first, second, extend=False, empty_char="XX"):
     first_row, second_row, status = _diff(first, second)
 
-    print(' '.join(first_row))
-    print(' '.join(second_row))
+    first_row_len_B = len([x for x in first_row if x != "  "])
+    second_row_len_B = len([x for x in second_row if x != "  "])
+
+    for e in range(len(first_row)):
+        first_row[e] = first_row[e].replace("  ", empty_char)
+        second_row[e] = second_row[e].replace("  ", empty_char)
+
+    print(' '.join(first_row), "| len: %sB" % first_row_len_B)
+    print(' '.join(second_row), "| len: %sB" % second_row_len_B)
 
     if extend:
         more_info = []
@@ -49,10 +69,13 @@ def show_diff(first, second, extend=False):
                 more_info.append((el[0], el[1].sz))
         print(more_info)
 
+    print()
     if status:
         print("Ok")
+    elif len([x for x in first_row if x != "__"]) == len(first_row):
+        print("Not equal")
     else:
-        print("Not equal at {} point/s".format(len([x for x in first_row if x != "__"])))
+        print("Not equal at {}B".format(len([x for x in first_row if x != "__"])))
 
 
 def get_diff(first, second):
@@ -60,6 +83,7 @@ def get_diff(first, second):
     return status
 
 
+@deprecated
 def table(first, second):
     f, s, status = _diff(first, second)
     show_diff(first, second)
