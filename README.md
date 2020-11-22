@@ -28,7 +28,7 @@ __ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
 Not equal at 11B
 
 # You can add a index to it
->>> show_diff(Ehter(), second_ether, index=True)
+>>> show_diff(Ether(), second_ether, index=True)
 
 __ __ ff __ __ ff __ 00 00 00 00 00 __ __ XX XX XX XX | len: 14B
 __ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
