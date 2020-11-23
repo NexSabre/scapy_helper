@@ -14,6 +14,12 @@ class TestScapyHelper(TestCase):
     def test_get_hex(self):
         assert get_hex(self.ether) == "ff ff ff ff ff ff 00 00 00 00 00 00 90 00"
 
+    def test_get_hex_uppercase(self):
+        self.assertEqual(
+            get_hex(self.ether, uppercase=True),
+            "FF FF FF FF FF FF 00 00 00 00 00 00 90 00"
+        )
+
     def test_show_diff(self):
         ether_wrong = "ff ff ff ff ff ff 00 00 00 00 aa 00 90 00"
         first_row, second_row, status = _diff(self.ether, ether_wrong)

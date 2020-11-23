@@ -47,12 +47,15 @@ def _prepare(obj):
     return obj
 
 
-def get_hex(frame):
-    return ' '.join([x.replace("0x", "").replace(",", "") for x in chexdump(frame, dump=True).split()])
+def get_hex(frame, uppercase=False):
+    str_hex = ' '.join([x.replace("0x", "").replace(",", "") for x in chexdump(frame, dump=True).split()])
+    if uppercase:
+        return str_hex.upper()
+    return str_hex.lower()
 
 
-def show_hex(frame):
-    print(get_hex(frame))
+def show_hex(frame, uppercase=False):
+    print(get_hex(frame, uppercase=uppercase))
 
 
 def _create_diff_indexes_list(indexes):
