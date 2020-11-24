@@ -8,3 +8,10 @@ class TestInterfaceInteroperability(TestCase):
             from scapy_helper import compare
         except ImportError as e:
             self.fail("Import Error: %s" % e)
+
+    def test_version_0_1_11(self):
+        try:
+            from scapy_helper import get_hex, show_diff, show_hex, table, hex_equal
+            from scapy_helper import Compare
+        except ImportError as e:
+            self.fail("Import Error: %s" % e)

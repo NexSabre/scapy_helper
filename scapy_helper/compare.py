@@ -27,6 +27,7 @@ class Compare:
         return show_diff(self.first, self.second)
 
     def tdiff(self):
+        """[Shortcut] Wrapper for the table_diff"""
         self.table_diff()
 
     def table_diff(self, index=False):
@@ -40,7 +41,7 @@ class Compare:
                 return None, column_a[0], column_a[1], column_b[1]
             return first, None, None, None
 
-        status = show_diff(self.first, self.second)
+        status = show_diff(self.first, self.second, index=index)
         self._print_table(prepare_data)
         return status
 

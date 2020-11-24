@@ -44,7 +44,16 @@ __ __ ff __ __ ff __ 00 00 00 00 00 __ __ ++ ++ ++ ++ | len: 14B
 __ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
                                                       |
       ^2       ^5    ^7 ^8 ^9 10 11       14 15 16 17 | position
+```
 
+## Test case usage
+### hex_equal (since v0.1.11)
+Return bool status of equality and print status if there is a difference between objects
+```python
+from scapy_helper import hex_equal
+
+# hex_equal(first, second, show_inequalities=True, **options_for_show_diff):
+assert hex_equal(ether1, ether2)
 ```
 
 ## Compare

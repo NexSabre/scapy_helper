@@ -97,7 +97,7 @@ def show_diff(first, second, index=False, extend=False, empty_char="XX"):
 
     print()
     if indexes_of_diff:
-        print("Not equal at {}B".format(len([x for x in first_row if x != "__"])))
+        print("Not equal at {}B's".format(len([x for x in first_row if x != "__"])))
         return True
     elif len([x for x in first_row if x != "__"]) == len(first_row):
         print("Not equal")
@@ -108,6 +108,25 @@ def show_diff(first, second, index=False, extend=False, empty_char="XX"):
 
 def count_bytes(packet_hex_list):
     return len([x for x in packet_hex_list if x != "  "])
+
+
+def hex_equal(first, second, show_inequalities=True, **kwargs):
+    """
+    Compare a two hex or hex-able Scapy objects. Return a True if objects are equal
+    :param first: str hex or Scapy object
+    :param second: str hex or Scapy object
+    :param show_inequalities: Print difference if elements are not equal
+    :param kwargs: Params for show diff
+    :return: bool
+    """
+    _, _, status = _diff(first, second)
+    if show_inequalities and status:
+        show_diff(first, second, **kwargs)
+    # diff returns a list of position on which the object is different
+    # if status is a empty Tuple, there's no difference between objects
+    if status:
+        return False
+    return True
 
 
 def get_diff(*args):

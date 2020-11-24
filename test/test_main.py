@@ -3,7 +3,7 @@ from unittest import TestCase
 from scapy.layers.l2 import Ether
 
 from scapy_helper import get_hex, show_diff
-from scapy_helper.main import _diff
+from scapy_helper.main import _diff, hex_equal
 
 
 class TestScapyHelper(TestCase):
@@ -63,3 +63,13 @@ class TestScapyHelper(TestCase):
             len(too_long_ether.split()),
             len(diff_tuple[1])
         )
+
+    def test_hex_equal(self):
+        self.assertTrue(hex_equal(self.ether, "ff ff ff ff ff ff 00 00 00 00 00 00 90 00"))
+
+    def test_hex_equal_with_show_diff_options(self):
+        options = {
+            "index": True
+        }
+        self.assertFalse(hex_equal(self.ether, "ff ff ff ff ff ff 0a 00 00 00 00 00 90 00",
+                                   show_inequalities=False, **options))
