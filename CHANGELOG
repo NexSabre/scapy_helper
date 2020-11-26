@@ -1,0 +1,5 @@
+v0.1.12
+* The 'show_diff's parameter 'empty_char' accepts only one character. It will be doubled in the process.
+
+v0.1.11
+* Add a 'hex_equal' function.

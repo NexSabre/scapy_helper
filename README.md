@@ -41,7 +41,7 @@ show_diff(Ether(), second_ether, index=True)
 # Not equal at 11B
 
 # You can add a custom char to mark a missing elements
-show_diff(Ether(), second_ether, index=True, empty_char="++")
+show_diff(Ether(), second_ether, index=True, empty_char="+")
 # output: 
 # __ __ ff __ __ ff __ 00 00 00 00 00 __ __ ++ ++ ++ ++ | len: 14B
 # __ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
@@ -62,8 +62,8 @@ assert hex_equal(Ether(), second_ether)
 ## Compare
 ### table_diff (tdiff as shortcut)
 ```text
->>> from scapy_helper.compare import Compare
->>> Compare(frame_1, frame_2).table_diff()
+from scapy_helper.compare import Compare
+Compare(frame_1, frame_2).table_diff()
 
 | Diff or header              | Element   | First             | Second            |
 |-----------------------------|-----------|-------------------|-------------------|

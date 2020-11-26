@@ -71,10 +71,19 @@ def _create_diff_indexes_list(indexes):
     return ' '.join(new_list)
 
 
+def __process_char(char):
+    multiplier = 2
+    if not char or not isinstance(char, str):
+        return "X" * multiplier
+    return char[0] * multiplier
+
+
 def show_diff(first, second, index=False, extend=False, empty_char="XX"):
     first_row, second_row, indexes_of_diff = _diff(first, second)
     first_row_len_bytes = count_bytes(first_row)
     second_row_len_bytes = count_bytes(second_row)
+
+    empty_char = __process_char(empty_char)
 
     for row in (first_row, second_row):
         for idx, element in enumerate(row):

@@ -5,7 +5,7 @@ setup(
     description="Several features that should help you use Scapy",
     author="Nex Sabre",
     author_email="nexsabre@protonmail.com",
-    version="0.1.11",
+    version="0.1.12",
     url="https://github.com/NexSabre/scapy_helper",
     packages=find_packages(),
     classifiers=[
