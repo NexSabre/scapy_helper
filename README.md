@@ -3,47 +3,50 @@
 Several features that should help you use Scapy.
 
 ## TL;DR
-```text
->>> from scapy_helper import *
->>> e = Ether() # Scapy Ether
+```python
+from scapy.layers.inet import Ether
+from scapy_helper import *
 
 # Dump frame hex
->>> hex = get_hex(e)
+hex_value = get_hex(Ether())
+# hex_value: 
 'ff ff ff ff ff ff 00 00 00 00 00 00 90 00'
 
 # Convert and print 
->>> show_hex(e)
-ff ff ff ff ff ff 00 00 00 00 00 00 90 00
+show_hex(Ether())
+# output: 
+# ff ff ff ff ff ff 00 00 00 00 00 00 90 00
 
 # Show the differences
 #   can be result of get_hex() or string or frame
->>> second_ether = "ff ff fc ff ff fa 00 00 00 00 00 00 90 00 11 11 00 22" 
->>> show_diff(Ether(), second_ether)
-WARN:: Frame len is not the same
-WARN:: Second row is longer by the 4B
-
-__ __ ff __ __ ff __ 00 00 00 00 00 __ __ XX XX XX XX | len: 14B
-__ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
-
-Not equal at 11B
+second_ether = "ff ff fc ff ff fa 00 00 00 00 00 00 90 00 11 11 00 22" 
+show_diff(Ether(), second_ether)
+# output: 
+# WARN:: Frame len is not the same
+# WARN:: Second row is longer by the 4B
+#
+# __ __ ff __ __ ff __ 00 00 00 00 00 __ __ XX XX XX XX | len: 14B
+# __ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
+#
+#Not equal at 11B
 
 # You can add a index to it
->>> show_diff(Ether(), second_ether, index=True)
-
-__ __ ff __ __ ff __ 00 00 00 00 00 __ __ XX XX XX XX | len: 14B
-__ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
-                                                      |
-      ^2       ^5    ^7 ^8 ^9 10 11       14 15 16 17 | position
-
-Not equal at 11B
+show_diff(Ether(), second_ether, index=True)
+# output: 
+# __ __ ff __ __ ff __ 00 00 00 00 00 __ __ XX XX XX XX | len: 14B
+# __ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
+#                                                       |
+#       ^2       ^5    ^7 ^8 ^9 10 11       14 15 16 17 | position
+#
+# Not equal at 11B
 
 # You can add a custom char to mark a missing elements
->> show_diff(ether_1, ether_2, index=True, empty_char="++")
-
-__ __ ff __ __ ff __ 00 00 00 00 00 __ __ ++ ++ ++ ++ | len: 14B
-__ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
-                                                      |
-      ^2       ^5    ^7 ^8 ^9 10 11       14 15 16 17 | position
+show_diff(Ether(), second_ether, index=True, empty_char="++")
+# output: 
+# __ __ ff __ __ ff __ 00 00 00 00 00 __ __ ++ ++ ++ ++ | len: 14B
+# __ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
+#                                                       |
+#       ^2       ^5    ^7 ^8 ^9 10 11       14 15 16 17 | position
 ```
 
 ## Test case usage
@@ -53,7 +56,7 @@ Return bool status of equality and print status if there is a difference between
 from scapy_helper import hex_equal
 
 # hex_equal(first, second, show_inequalities=True, **options_for_show_diff):
-assert hex_equal(ether1, ether2)
+assert hex_equal(Ether(), second_ether)
 ```
 
 ## Compare
