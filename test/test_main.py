@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from scapy.layers.l2 import Ether
+from scapy.utils import chexdump
 
 from scapy_helper import get_hex, show_diff
 from scapy_helper.main import _diff, hex_equal
@@ -73,3 +74,11 @@ class TestScapyHelper(TestCase):
         }
         self.assertFalse(hex_equal(self.ether, "ff ff ff ff ff ff 0a 00 00 00 00 00 90 00",
                                    show_inequalities=False, **options))
+
+    def test_chexdump_native_support(self):
+        frame_chexdump = TestScapyHelper.old_method(self.ether)
+        self.assertEqual(frame_chexdump, get_hex(self.ether))
+
+    @staticmethod
+    def old_method(frame):
+        return ' '.join([x.replace("0x", "").replace(",", "") for x in chexdump(frame, dump=True).split()])

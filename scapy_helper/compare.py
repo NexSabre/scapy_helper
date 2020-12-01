@@ -1,6 +1,6 @@
 from tabulate import tabulate
 
-from scapy_helper.main import get_hex, show_diff, show_hex, _diff
+from scapy_helper.main import get_hex, show_diff
 
 
 class Compare:

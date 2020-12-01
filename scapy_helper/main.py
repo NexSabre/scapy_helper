@@ -1,5 +1,3 @@
-from scapy.utils import chexdump
-
 from scapy_helper.helpers.depracated import deprecated
 
 
@@ -48,10 +46,14 @@ def _prepare(obj):
 
 
 def get_hex(frame, uppercase=False):
-    str_hex = ' '.join([x.replace("0x", "").replace(",", "") for x in chexdump(frame, dump=True).split()])
+    str_hex = bytes(frame).hex()
+    j = []
+    for e, i in enumerate(str_hex):
+        if e % 2:
+            j.append(str_hex[e - 1] + str_hex[e])
     if uppercase:
-        return str_hex.upper()
-    return str_hex.lower()
+        return ' '.join(j).upper()
+    return ' '.join(j).lower()
 
 
 def show_hex(frame, uppercase=False):

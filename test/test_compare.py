@@ -1,9 +1,9 @@
 import unittest
 
-from scapy_helper.compare import Compare
-
 from scapy.layers.inet import IP, UDP
 from scapy.layers.l2 import Ether
+
+from scapy_helper.compare import Compare
 
 
 class TestCompare(unittest.TestCase):
