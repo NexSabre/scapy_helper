@@ -23,6 +23,10 @@ class Compare:
         return get_hex(self.first), get_hex(self.second)
 
     def diff(self):
+        """
+        Show differences between two packets
+        :return: bool: Return True if packets are NOT EQUAL
+        """
         print("This is temporary -- will be changed in the future")
         return show_diff(self.first, self.second)
 
@@ -31,6 +35,11 @@ class Compare:
         self.table_diff()
 
     def table_diff(self, index=False):
+        """
+        Print a difference and print table information about packets
+        :param index: Default=False, If True show position under the differ position
+        :return: bool: Return True if packets are NOT EQUAL
+        """
         def prepare_data(first, second):
             if "=" in first and "=" in second:
                 column_a = first.split("=")
@@ -46,6 +55,11 @@ class Compare:
         return status
 
     def _print_table(self, prepare_data):
+        """
+        Print table base on prepared data
+        :param prepare_data:
+        :return: None
+        """
         f_details = self.first.show(dump=True).split("\n")
         s_details = self.second.show(dump=True).split("\n")
         data = [("Diff or header", "Element", "First", "Second")]
