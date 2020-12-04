@@ -46,6 +46,12 @@ def _prepare(obj):
 
 
 def get_hex(frame, uppercase=False):
+    """
+    Return a string object of Hex representation of the Scapy's framework
+    :param frame: Scapy's Packet Object
+    :param uppercase: bool: If True letters be UPPERCASE
+    :return: str: Hex
+    """
     str_hex = bytes(frame).hex()
     j = []
     for e, i in enumerate(str_hex):
@@ -57,6 +63,7 @@ def get_hex(frame, uppercase=False):
 
 
 def show_hex(frame, uppercase=False):
+    """Print a hex representation of the Scapy's object"""
     print(get_hex(frame, uppercase=uppercase))
 
 
