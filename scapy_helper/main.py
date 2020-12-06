@@ -50,7 +50,7 @@ def get_hex(frame, uppercase=False):
     Return a string object of Hex representation of the Scapy's framework
     :param frame: Scapy's Packet Object
     :param uppercase: bool: If True letters be UPPERCASE
-    :return: str: Hex
+    :return: str: Hex   
     """
     str_hex = bytes(frame).hex()
     j = []
@@ -67,16 +67,21 @@ def show_hex(frame, uppercase=False):
     print(get_hex(frame, uppercase=uppercase))
 
 
-def _create_diff_indexes_list(indexes):
+def _create_diff_indexes_list(indexes, max_len):
     new_list = []
-    for x in range(max(indexes) + 1):
-        new_list.append("  ")
-    for idx in indexes:
+
+    for idx in range(max_len):
+        if idx not in indexes:
+            new_list.append("..")
+            continue
+
         if idx < 10:
-            new_list[idx] = str("^%s" % idx)
-        else:
-            new_list[idx] = str(idx)
-    new_list.append("| position")
+            new_list.append(str("^%s" % idx))
+            continue
+        new_list.append(str(idx))
+    else:
+        new_list.append("| position")
+
     return ' '.join(new_list)
 
 
@@ -104,7 +109,8 @@ def show_diff(first, second, index=False, extend=False, empty_char="XX"):
     if index and indexes_of_diff:
         str_bar = "   " * first_row_len_bytes if first_row_len_bytes > second_row_len_bytes else \
             "   " * second_row_len_bytes
-        print("%s|\n%s" % (str_bar, _create_diff_indexes_list(indexes_of_diff)))
+        print("%s|\n%s" % (str_bar, _create_diff_indexes_list(indexes_of_diff, max((first_row_len_bytes,
+                                                                                    second_row_len_bytes)))))
 
     if extend:
         more_info = []

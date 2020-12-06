@@ -35,3 +35,7 @@ class TestShowDiff(TestCase):
     def test_show_diff_with_indexes_and_custom_char_none(self):
         ether_2 = "ff ff fc ff ff fa 00 11 11 11 11 11 90 00 11 11 00 22"
         show_diff(self.ether_1, ether_2, index=True, empty_char=None)
+
+    def test_show_diff_with_indexes_proper_len_of_last_position(self):
+        ether_2 = "ff ff fc ff ff fa 00 11 11 11 11 11 90 00"
+        show_diff(self.ether_1, ether_2, index=True, empty_char=None)
