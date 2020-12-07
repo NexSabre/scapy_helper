@@ -1,4 +1,7 @@
-![Test](https://github.com/NexSabre/scapy_helper/workflows/Test/badge.svg?branch=master)   ![CodeQL](https://github.com/NexSabre/scapy_helper/workflows/CodeQL/badge.svg?branch=master)
+![Test](https://github.com/NexSabre/scapy_helper/workflows/Test/badge.svg?branch=master)
+![CodeQL](https://github.com/NexSabre/scapy_helper/workflows/CodeQL/badge.svg?branch=master)
+[![PyPI version](https://badge.fury.io/py/scapy-helper.svg)](https://badge.fury.io/py/scapy-helper)
+
 # Scapy helper
 Several features that should help you use Scapy.
 
