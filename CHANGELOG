@@ -1,3 +1,12 @@
+v0.2.2
+* Change a _diff into diff which accepts List[List[str], List[str]] to directly compare two hex in "00 11" format
+
+v0.2.1
+* Small improvements around _diff func
+
+v0.2.0
+* Align License in all files
+
 v0.1.12
 * The 'show_diff's parameter 'empty_char' accepts only one character. It will be doubled in the process.
 
