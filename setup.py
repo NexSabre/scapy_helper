@@ -1,11 +1,16 @@
 from setuptools import setup, find_packages
 
+with open("../README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
     name="scapy_helper",
     description="Several features that should help you use Scapy",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author="Nex Sabre",
     author_email="nexsabre@protonmail.com",
-    version="0.2.2",
+    version="0.2.3",
     url="https://github.com/NexSabre/scapy_helper",
     packages=find_packages(),
     classifiers=[
