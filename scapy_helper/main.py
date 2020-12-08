@@ -1,24 +1,32 @@
 from scapy_helper.helpers.depracated import deprecated
 
 
-def _diff(first, second):
-    first = _prepare(first)
-    second = _prepare(second)
+def diff(*args):
+    """
+    Show diff between two hex list
+    :param args:
+    :return:
+    """
+    if len(args) != 2:
+        raise NotImplementedError("Only comparison of the two list are supported")
 
-    _fill_empty_elements(first, second)
-
-    first_row = []
-    second_row = []
+    result_list = ([], [])
     diff_indexes = []
-    for e, _ in enumerate(first):
-        if first[e].lower() != second[e].lower():
-            first_row.append(first[e])
-            second_row.append(second[e])
+    diff_list = []
+
+    for a in args:
+        diff_list.append(_prepare(a))
+    _fill_empty_elements(*diff_list)
+
+    for e, _ in enumerate(diff_list[0]):
+        if diff_list[0][e].lower() != diff_list[1][e].lower():
+            for i in range(2):
+                result_list[i].append(diff_list[i][e])
             diff_indexes.append(e)
             continue
-        first_row.append("__")
-        second_row.append("__")
-    return first_row, second_row, diff_indexes
+        for i in range(2):
+            result_list[i].append("__")
+    return result_list[0], result_list[1], diff_indexes
 
 
 def _fill_empty_elements(first, second):
@@ -93,7 +101,7 @@ def __process_char(char):
 
 
 def show_diff(first, second, index=False, extend=False, empty_char="XX"):
-    first_row, second_row, indexes_of_diff = _diff(first, second)
+    first_row, second_row, indexes_of_diff = diff(first, second)
     first_row_len_bytes = count_bytes(first_row)
     second_row_len_bytes = count_bytes(second_row)
 
@@ -143,7 +151,7 @@ def hex_equal(first, second, show_inequalities=True, **kwargs):
     :param kwargs: Params for show diff
     :return: bool
     """
-    _, _, status = _diff(first, second)
+    _, _, status = diff(first, second)
     if show_inequalities and status:
         show_diff(first, second, **kwargs)
     # diff returns a list of position on which the object is different
@@ -158,13 +166,13 @@ def get_diff(*args):
 
 
 def get_diff_status(first, second):
-    _, _, status = _diff(first, second)
+    _, _, status = diff(first, second)
     return status
 
 
 @deprecated
 def table(first, second):
-    f, s, status = _diff(first, second)
+    f, s, status = diff(first, second)
     show_diff(first, second)
     f_details = first.show(dump=True).split("\n")
     s_details = second.show(dump=True).split("\n")
