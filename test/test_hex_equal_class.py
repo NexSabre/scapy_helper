@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from scapy.layers.l2 import Ether
 
-from scapy_helper.hex_equal import HexEqual
+from scapy_helper.test_case_extensions.hex_equal import HexEqual
 
 
 class TestHexEqualClass(TestCase, HexEqual):

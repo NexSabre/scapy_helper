@@ -1,3 +1,6 @@
+v0.3.0
+* assertHexEqual/assertHexNotEqual were added. It should be handy shortcut for ex Unittest or PyTest framework
+
 v0.2.2
 * Change a _diff into diff which accepts List[List[str], List[str]] to directly compare two hex in "00 11" format
 
