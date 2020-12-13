@@ -1,7 +1,7 @@
 from scapy_helper.helpers.depracated import deprecated
 
 
-def diff(*args):
+def diff(*args, skip_if_same=True):
     """
     Show diff between two hex list
     :param args:
@@ -24,8 +24,12 @@ def diff(*args):
                 result_list[i].append(diff_list[i][e])
             diff_indexes.append(e)
             continue
-        for i in range(2):
-            result_list[i].append("__")
+        if skip_if_same:
+            for i in range(2):
+                result_list[i].append("__")
+        else:
+            for i in range(2):
+                result_list[i].append(diff_list[i][e])
     return result_list[0], result_list[1], diff_indexes
 
 
@@ -137,6 +141,43 @@ def show_diff(first, second, index=False, extend=False, empty_char="XX"):
     print("Ok")
     return False
 
+
+def show_diff_full(first, second, index=True, extend=False, empty_char="XX"):
+    first_row, second_row, indexes_of_diff = diff(first, second, skip_if_same=False)
+    first_row_len_bytes = count_bytes(first_row)
+    second_row_len_bytes = count_bytes(second_row)
+
+    empty_char = __process_char(empty_char)
+
+    for row in (first_row, second_row):
+        for idx, element in enumerate(row):
+            if element == "  ":
+                row[idx] = empty_char
+
+    print(' '.join(first_row), "| len: %sB" % first_row_len_bytes)
+    print(' '.join(second_row), "| len: %sB" % second_row_len_bytes)
+    if index and indexes_of_diff:
+        str_bar = "   " * first_row_len_bytes if first_row_len_bytes > second_row_len_bytes else \
+            "   " * second_row_len_bytes
+        print("%s|\n%s" % (str_bar, _create_diff_indexes_list(indexes_of_diff, max((first_row_len_bytes,
+                                                                                    second_row_len_bytes)))))
+
+    if extend:
+        more_info = []
+        for types in first.class_fieldtype.items():
+            for el in types[1].items():
+                more_info.append((el[0], el[1].sz))
+        print(more_info)
+
+    print()
+    if indexes_of_diff:
+        print("Not equal at {}B's".format(len([x for x in first_row if x != "__"])))
+        return True
+    elif len([x for x in first_row if x != "__"]) == len(first_row):
+        print("Not equal")
+        return True
+    print("Ok")
+    return False
 
 def count_bytes(packet_hex_list):
     return len([x for x in packet_hex_list if x != "  "])
