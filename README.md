@@ -53,8 +53,8 @@ show_diff(Ether(), second_ether, index=True, empty_char="+")
 ```
 
 ## Test case usage
-### Extends test class using HexEqual
-Since v0.3, you can use assertHexEqual/assertHexNotEqual in the tests.
+### Extends test class using HexEqual (since v0.3.0)
+You can use assertHexEqual/assertHexNotEqual in the tests.
 When the assertion fails, wrapper produces information about the frames (in hex).
 ```python
 import unittest
