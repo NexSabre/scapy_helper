@@ -1,13 +1,15 @@
 from scapy_helper.helpers.depracated import deprecated
 
 
-def diff(skip_if_same=True, *args):
+def diff(skip_if_same, *args):
     """
     Show diff between two hex list
     :param skip_if_same:
     :param args:
     :return:
     """
+    if not skip_if_same:
+        skip_if_same = True
     if len(args) != 2:
         raise NotImplementedError("Only comparison of the two list are supported")
 
