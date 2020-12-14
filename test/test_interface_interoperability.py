@@ -20,6 +20,6 @@ class TestInterfaceInteroperability(TestCase):
         try:
             from scapy_helper import get_hex, show_diff, show_hex, table, hex_equal
             from scapy_helper import Compare
-            from scapy_helper import HexEqual
+            from scapy_helper import PacketAssert
         except ImportError as e:
             self.fail("Import Error: %s" % e)

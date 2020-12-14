@@ -2,10 +2,10 @@ from unittest import TestCase
 
 from scapy.layers.l2 import Ether
 
-from scapy_helper.test_case_extensions.hex_equal import HexEqual
+from scapy_helper.test_case_extensions.packet_assert import PacketAssert
 
 
-class TestHexEqualClass(TestCase, HexEqual):
+class TestPacketAssert(TestCase, PacketAssert):
     def test_assert_hex_equal(self):
         self.assertHexEqual(Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00"),
                             Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00"))

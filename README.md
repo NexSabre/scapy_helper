@@ -53,19 +53,25 @@ show_diff(Ether(), second_ether, index=True, empty_char="+")
 ```
 
 ## Test case usage
-### Extends test class using HexEqual (since v0.3.0)
-You can use assertHexEqual/assertHexNotEqual in the tests.
+### Extends test class using PacketAssert (since v0.3.1)
+__Note: In the v0.3.0 this class was called HexEqual__
+
+You can use assertHexEqual/assertHexNotEqual and assertBytesEqual/assertBytesNotEqual in the tests.
 When the assertion fails, wrapper produces information about the frames (in hex).
+
 ```python
 import unittest
-from scapy_helper.test_case_extensions.hex_equal import HexEqual
+from scapy_helper.test_case_extensions.packet_assert import PacketAssert
 
-class TestExample(unittest.TestCase, HexEqual):
+class TestExample(unittest.TestCase, PacketAssert):
     def test_example(self):
         self.assertHexEqual(Ether(), Ether("10.10.10.10"), "Frame should be the same")
 
     def text_example_negative(self):
         self.assertNotEqual(Ether(), Ether(), "Frame should be diffrent")
+
+    def test_example_bytes(self):
+        self.assertBytesEqaul(Ether(), Ether(), "Bytes should be equal")
 ```
 
 

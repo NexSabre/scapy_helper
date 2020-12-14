@@ -4,7 +4,7 @@ from scapy_helper.main import show_diff_full
 failure = AssertionError
 
 
-class HexEqual:
+class PacketAssert:
     @staticmethod
     def assertHexEqual(first, second, message=None):
         if not hex_equal(first, second, show_inequalities=False):

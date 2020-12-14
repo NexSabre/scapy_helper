@@ -1,3 +1,6 @@
+v0.3.2
+* rename HexEqual into PacketAssert
+
 v0.3.1
 * assertBytesEqual/assertBytesNotEqual
 * add a Python 2.7 compatibility
