@@ -16,3 +16,23 @@ class HexEqual:
         if hex_equal(first, second, show_inequalities=False):
             show_diff(first, second)
             raise failure(first, second, message)
+
+    @staticmethod
+    def assertBytesEqaul(first, second, message=None):
+        if not isinstance(first, bytes):
+            first = bytes(first)
+        if not isinstance(second, bytes):
+            second = bytes(second)
+
+        if first != second:
+            raise failure(first, second, message)
+
+    @staticmethod
+    def assertBytesNotEqaul(first, second, message=None):
+        if not isinstance(first, bytes):
+            first = bytes(first)
+        if not isinstance(second, bytes):
+            second = bytes(second)
+
+        if first == second:
+            raise failure(first, second, message)
