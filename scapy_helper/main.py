@@ -1,9 +1,10 @@
 from scapy_helper.helpers.depracated import deprecated
 
 
-def diff(*args, skip_if_same=True):
+def diff(skip_if_same=True, *args):
     """
     Show diff between two hex list
+    :param skip_if_same:
     :param args:
     :return:
     """
