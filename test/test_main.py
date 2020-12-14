@@ -8,7 +8,7 @@ from scapy_helper.main import diff, hex_equal
 
 
 class TestScapyHelper(TestCase):
-    def setUp(self) -> None:
+    def setUp(self):
         self.ether = Ether(dst="ff:ff:ff:ff:ff:ff",
                            src="00:00:00:00:00:00")
 
