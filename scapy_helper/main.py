@@ -1,12 +1,18 @@
+import sys
+
 from scapy_helper.helpers.depracated import deprecated
 
 
-def diff(*args, skip_if_same=True):
+def diff(*args, **kwargs):
     """
     Show diff between two hex list
+    :param skip_if_same:
     :param args:
     :return:
     """
+    skip_if_same = True
+    if kwargs.get("skip_if_same", False):
+        skip_if_same = kwargs["skip_if_same"]
     if len(args) != 2:
         raise NotImplementedError("Only comparison of the two list are supported")
 
@@ -64,7 +70,11 @@ def get_hex(frame, uppercase=False):
     :param uppercase: bool: If True letters be UPPERCASE
     :return: str: Hex   
     """
-    str_hex = bytes(frame).hex()
+    if sys.version_info.major == 2:
+        import binascii
+        str_hex = binascii.b2a_hex(bytes(frame))
+    else:
+        str_hex = bytes(frame).hex()
     j = []
     for e, i in enumerate(str_hex):
         if e % 2:
@@ -178,6 +188,7 @@ def show_diff_full(first, second, index=True, extend=False, empty_char="XX"):
         return True
     print("Ok")
     return False
+
 
 def count_bytes(packet_hex_list):
     return len([x for x in packet_hex_list if x != "  "])
