@@ -1,3 +1,7 @@
+v0.3.1
+* assertBytesEqual/assertBytesNotEqual
+* add a Python 2.7 compatibility
+
 v0.3.0
 * assertHexEqual/assertHexNotEqual were added. It should be handy shortcut for ex Unittest or PyTest framework
 
