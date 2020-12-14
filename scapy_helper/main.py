@@ -1,3 +1,5 @@
+import sys
+
 from scapy_helper.helpers.depracated import deprecated
 
 
@@ -68,7 +70,11 @@ def get_hex(frame, uppercase=False):
     :param uppercase: bool: If True letters be UPPERCASE
     :return: str: Hex   
     """
-    str_hex = bytes(frame).hex()
+    if sys.version_info.major == 2:
+        import binascii
+        str_hex = binascii.b2a_hex(bytes(frame))
+    else:
+        str_hex = bytes(frame).hex()
     j = []
     for e, i in enumerate(str_hex):
         if e % 2:
@@ -182,6 +188,7 @@ def show_diff_full(first, second, index=True, extend=False, empty_char="XX"):
         return True
     print("Ok")
     return False
+
 
 def count_bytes(packet_hex_list):
     return len([x for x in packet_hex_list if x != "  "])
