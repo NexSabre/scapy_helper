@@ -1,5 +1,13 @@
+import sys
+
 from unittest import TestCase
-from unittest.mock import MagicMock
+
+if sys.version_info.major == 2:
+    from mock import MagicMock
+elif sys.version_info.minor >= 5:
+    from unittest.mock import MagicMock
+else:
+    raise Exception("Not supported version of the Python for the tests")
 
 from scapy.layers.l2 import Ether
 from scapy.utils import chexdump
