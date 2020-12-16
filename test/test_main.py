@@ -1,10 +1,11 @@
 from unittest import TestCase
+from unittest.mock import MagicMock
 
 from scapy.layers.l2 import Ether
 from scapy.utils import chexdump
 
 from scapy_helper import get_hex, show_diff
-from scapy_helper.main import diff, hex_equal
+from scapy_helper.main import diff, hex_equal, _prepare
 
 
 class TestScapyHelper(TestCase):
@@ -99,6 +100,11 @@ class TestScapyHelper(TestCase):
         }
         self.assertFalse(hex_equal(self.ether, "ff ff ff ff ff ff 0a 00 00 00 00 00 90 00",
                                    show_inequalities=False, **options))
+
+    def test__prepare(self):
+        obj = MagicMock()
+        obj.hex = MagicMock(return_value="ff ff ff")
+        self.assertEqual(_prepare(obj), "ff ff ff", "Object method hex, should return str of hex")
 
     def test_chexdump_native_support(self):
         frame_chexdump = TestScapyHelper.old_method(self.ether)
