@@ -1,3 +1,6 @@
+v0.3.3
+* add support for .hex() method
+
 v0.3.2
 * rename HexEqual into PacketAssert
 
