@@ -1,4 +1,11 @@
 from unittest import TestCase
+import sys
+if sys.version_info.major == 2:
+    from mock import MagicMock
+elif sys.version_info.minor >= 5:
+    from unittest.mock import MagicMock
+else:
+    raise Exception("Not supported version of the Python for the tests")
 
 from scapy.layers.l2 import Ether
 
@@ -9,6 +16,13 @@ class TestPacketAssert(TestCase, PacketAssert):
     def test_assert_hex_equal(self):
         self.assertHexEqual(Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00"),
                             Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00"))
+
+    def test_assert_hex_equal_w_automatic_conversion(self):
+        obj = MagicMock()
+        obj.hex = MagicMock(return_value="ff ff ff ff ff ff 00 00 00 00 00 00 90 00")
+
+        self.assertHexEqual(Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00"),
+                            obj)
 
     def test_assert_hex_not_equal(self):
         self.assertHexNotEqual(Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00"),

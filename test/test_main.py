@@ -112,7 +112,7 @@ class TestScapyHelper(TestCase):
     def test__prepare(self):
         obj = MagicMock()
         obj.hex = MagicMock(return_value="ff ff ff")
-        self.assertEqual(_prepare(obj), "ff ff ff", "Object method hex, should return str of hex")
+        self.assertEqual(_prepare(obj), ["ff", "ff", "ff"], "Object method hex, should return str of hex")
 
     def test_chexdump_native_support(self):
         frame_chexdump = TestScapyHelper.old_method(self.ether)

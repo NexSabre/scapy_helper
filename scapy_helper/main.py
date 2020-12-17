@@ -57,7 +57,7 @@ def _fill_empty_elements(first, second):
 
 def _prepare(obj):
     if hasattr(obj, "hex"):
-        return obj.hex()
+        return obj.hex().split()
     if not isinstance(obj, str):
         obj = get_hex(obj)
     if isinstance(obj, str):
