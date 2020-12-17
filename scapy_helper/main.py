@@ -6,8 +6,8 @@ from scapy_helper.helpers.depracated import deprecated
 def diff(*args, **kwargs):
     """
     Show diff between two hex list
-    :param skip_if_same:
     :param args:
+    :param kwargs:
     :return:
     """
     skip_if_same = True
@@ -76,7 +76,7 @@ def get_hex(frame, uppercase=False):
         import binascii
         str_hex = binascii.b2a_hex(bytes(frame))
     else:
-        str_hex = bytes(frame).hex()
+        str_hex = bytes(frame).hexp()
     j = []
     for e, i in enumerate(str_hex):
         if e % 2:
@@ -128,8 +128,8 @@ def show_diff(first, second, index=False, extend=False, empty_char="XX"):
             if element == "  ":
                 row[idx] = empty_char
 
-    print(' '.join(first_row), "| len: %sB" % first_row_len_bytes)
-    print(' '.join(second_row), "| len: %sB" % second_row_len_bytes)
+    print("%s | len: %sB" % (' '.join(first_row), first_row_len_bytes))
+    print("%s | len: %sB" % (' '.join(second_row), second_row_len_bytes))
     if index and indexes_of_diff:
         str_bar = "   " * first_row_len_bytes if first_row_len_bytes > second_row_len_bytes else \
             "   " * second_row_len_bytes
@@ -143,7 +143,7 @@ def show_diff(first, second, index=False, extend=False, empty_char="XX"):
                 more_info.append((el[0], el[1].sz))
         print(more_info)
 
-    print()
+    print("")
     if indexes_of_diff:
         print("Not equal at {}B's".format(len([x for x in first_row if x != "__"])))
         return True
@@ -181,7 +181,7 @@ def show_diff_full(first, second, index=True, extend=False, empty_char="XX"):
                 more_info.append((el[0], el[1].sz))
         print(more_info)
 
-    print()
+    print("")
     if indexes_of_diff:
         print("Not equal at {}B's".format(len([x for x in first_row if x != "__"])))
         return True
