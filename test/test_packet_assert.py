@@ -29,7 +29,7 @@ class TestPacketAssert(TestCase, PacketAssert):
                                Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:aa"))
 
     def test_negative_assert_hex_equal(self):
-        # with self.assertRaises(AssertionError):
+        with self.assertRaises(AssertionError):
             self.assertHexEqual(Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00"),
                                 Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:aa"))
 
