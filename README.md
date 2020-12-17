@@ -71,7 +71,7 @@ class TestExample(unittest.TestCase, PacketAssert):
         self.assertNotEqual(Ether(), Ether(), "Frame should be diffrent")
 
     def test_example_bytes(self):
-        self.assertBytesEqaul(Ether(), Ether(), "Bytes should be equal")
+        self.assertBytesEqual(Ether(), Ether(), "Bytes should be equal")
 ```
 
 

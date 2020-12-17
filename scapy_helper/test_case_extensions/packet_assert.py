@@ -18,7 +18,7 @@ class PacketAssert:
             raise failure(first, second, message)
 
     @staticmethod
-    def assertBytesEqaul(first, second, message=None):
+    def assertBytesEqual(first, second, message=None):
         if not isinstance(first, bytes):
             first = bytes(first)
         if not isinstance(second, bytes):
@@ -28,7 +28,7 @@ class PacketAssert:
             raise failure(first, second, message)
 
     @staticmethod
-    def assertBytesNotEqaul(first, second, message=None):
+    def assertBytesNotEqual(first, second, message=None):
         if not isinstance(first, bytes):
             first = bytes(first)
         if not isinstance(second, bytes):

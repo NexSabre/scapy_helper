@@ -26,17 +26,17 @@ class TestPacketAssert(TestCase, PacketAssert):
 
     def test_assert_bytes_equal(self):
         with self.assertRaises(AssertionError):
-            self.assertBytesEqaul(Ether(), Ether(dst="00:00:00:00:00:00"))
+            self.assertBytesEqual(Ether(), Ether(dst="00:00:00:00:00:00"))
 
     def test_negative_assert_bytes_equal(self):
-        self.assertBytesEqaul(Ether(), Ether())
+        self.assertBytesEqual(Ether(), Ether())
 
     def test_assert_bytes_not_equal(self):
-        self.assertBytesNotEqaul(Ether(), Ether(dst="00:00:00:00:00:00"))
+        self.assertBytesNotEqual(Ether(), Ether(dst="00:00:00:00:00:00"))
 
     def test_negative_bytes_not_equal(self):
         with self.assertRaises(AssertionError):
-            self.assertBytesNotEqaul(Ether(), Ether())
+            self.assertBytesNotEqual(Ether(), Ether())
 
     def test_assert_hex_different_at_position_zero(self):
         self.assertHexDifferentAt(Ether(dst="00:00:00:00:00:00"),
