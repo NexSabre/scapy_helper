@@ -10,7 +10,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Nex Sabre",
     author_email="nexsabre@protonmail.com",
-    version="0.4.0",
+    version="0.4.1",
     url="https://github.com/NexSabre/scapy_helper",
     packages=find_packages(),
     classifiers=[
