@@ -40,11 +40,15 @@ class PacketAssert:
     @staticmethod
     def assertHexDifferentAt(first, second, positions, message):
         _, _, differences_at_position = diff(first, second)
+        if len(differences_at_position) == 0:
+            print("Hexs are equal")
+            raise failure(first, second, message)
+
         if isinstance(positions, int):
-            if positions not in differences_at_position:
-                show_diff(first, second)
+            if len(differences_at_position) != 1 or (positions not in differences_at_position):
+                show_diff(first, second, index=True)
                 raise failure(first, second, message)
         elif isinstance(positions, (list, tuple)):
-            if not set(positions).issubset(set(differences_at_position)):
-                show_diff(first, second)
+            if not set(positions).issubset(set(differences_at_position)) or set(positions) < set(differences_at_position):
+                show_diff(first, second, index=True)
                 raise failure(first, second, message)

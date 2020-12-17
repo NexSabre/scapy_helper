@@ -51,6 +51,13 @@ class TestPacketAssert(TestCase, PacketAssert):
                                       positions=2,
                                       message="Packets should be different on 0 position")
 
+    def test_negative_assert_hex_different_at_more_differences(self):
+        with self.assertRaises(AssertionError):
+            self.assertHexDifferentAt(Ether(dst="00:00:00:00:00:00"),
+                                      Ether(dst="01:01:01:00:00:00"),
+                                      positions=2,
+                                      message="Packets should be different on 0 position")
+
     def test_assert_hex_different_at_position_list(self):
         self.assertHexDifferentAt(Ether(dst="00:00:00:00:00:00"),
                                   Ether(dst="01:01:00:00:00:00"),
@@ -69,4 +76,11 @@ class TestPacketAssert(TestCase, PacketAssert):
             self.assertHexDifferentAt(Ether(dst="00:00:00:00:00:00"),
                                       Ether(dst="01:01:00:00:00:00"),
                                       positions=(0, 1, 2),
-                                      message="Packets should be different on (0, 1) position")
+                                      message="Packets should be different on (0, 1) positions")
+
+    def test_negative_assert_hex_different_at_position_hex_not_equal_list_is_subset(self):
+        with self.assertRaises(AssertionError):
+            self.assertHexDifferentAt(Ether(dst="00:00:00:00:00:00"),
+                                      Ether(dst="01:01:01:01:01:01"),
+                                      positions=(0, 1, 2),
+                                      message="Packets should be different on (0-5) positions")
