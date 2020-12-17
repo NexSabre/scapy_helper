@@ -1,3 +1,6 @@
+v0.4.5
+* Introduce a batch of improvements. Automatically convert packages to hex format, show str[hex] object when assertion failed. Resolve a few bugs when used with Python 2.7. The clean message format for Python 2.7.
+
 v0.3.4
 * add assertHexDifferentAt to find difference on specific positions
 
