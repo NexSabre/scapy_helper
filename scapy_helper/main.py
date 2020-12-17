@@ -76,7 +76,7 @@ def get_hex(frame, uppercase=False):
         import binascii
         str_hex = binascii.b2a_hex(bytes(frame))
     else:
-        str_hex = bytes(frame).hexp()
+        str_hex = bytes(frame).hex()
     j = []
     for e, i in enumerate(str_hex):
         if e % 2:
