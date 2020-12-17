@@ -1,5 +1,5 @@
 from scapy_helper import hex_equal, show_diff
-from scapy_helper.main import show_diff_full
+from scapy_helper.main import show_diff_full, diff
 
 failure = AssertionError
 
@@ -36,3 +36,15 @@ class PacketAssert:
 
         if first == second:
             raise failure(first, second, message)
+
+    @staticmethod
+    def assertHexDifferentAt(first, second, positions, message):
+        _, _, differences_at_position = diff(first, second)
+        if isinstance(positions, int):
+            if positions not in differences_at_position:
+                show_diff(first, second)
+                raise failure(first, second, message)
+        elif isinstance(positions, (list, tuple)):
+            if not set(positions).issubset(set(differences_at_position)):
+                show_diff(first, second)
+                raise failure(first, second, message)

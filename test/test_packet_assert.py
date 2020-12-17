@@ -37,3 +37,36 @@ class TestPacketAssert(TestCase, PacketAssert):
     def test_negative_bytes_not_equal(self):
         with self.assertRaises(AssertionError):
             self.assertBytesNotEqaul(Ether(), Ether())
+
+    def test_assert_hex_different_at_position_zero(self):
+        self.assertHexDifferentAt(Ether(dst="00:00:00:00:00:00"),
+                                  Ether(dst="01:00:00:00:00:00"),
+                                  positions=0,
+                                  message="Packets should be different on 0 position")
+
+    def test_negative_assert_hex_different_at_position_two(self):
+        with self.assertRaises(AssertionError):
+            self.assertHexDifferentAt(Ether(dst="00:00:00:00:00:00"),
+                                      Ether(dst="01:00:00:00:00:00"),
+                                      positions=2,
+                                      message="Packets should be different on 0 position")
+
+    def test_assert_hex_different_at_position_list(self):
+        self.assertHexDifferentAt(Ether(dst="00:00:00:00:00:00"),
+                                  Ether(dst="01:01:00:00:00:00"),
+                                  positions=(0, 1),
+                                  message="Packets should be different on (0, 1) position")
+
+    def test_negative_assert_hex_different_at_position_wrong_list(self):
+        with self.assertRaises(AssertionError):
+            self.assertHexDifferentAt(Ether(dst="00:00:00:00:00:00"),
+                                      Ether(dst="01:01:00:00:00:00"),
+                                      positions=(0, 3),
+                                      message="Packets should be different on (0, 1) position")
+
+    def test_negative_assert_hex_different_at_position_wrong_list_half_correct(self):
+        with self.assertRaises(AssertionError):
+            self.assertHexDifferentAt(Ether(dst="00:00:00:00:00:00"),
+                                      Ether(dst="01:01:00:00:00:00"),
+                                      positions=(0, 1, 2),
+                                      message="Packets should be different on (0, 1) position")
