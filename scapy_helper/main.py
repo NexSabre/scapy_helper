@@ -5,7 +5,7 @@ from scapy_helper.helpers.depracated import deprecated
 
 def diff(*args, **kwargs):
     """
-    Show diff between two hex list
+    Return a diff between two hex list
     :param args:
     :param kwargs:
     :return:
