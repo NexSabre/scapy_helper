@@ -5,13 +5,20 @@ from scapy.layers.l2 import Ether
 from scapy.utils import chexdump
 
 from scapy_helper import get_hex, show_diff
-from scapy_helper.main import diff, hex_equal, _prepare
+from scapy_helper.main import diff, hex_equal, _prepare, get_diff
 
 
 class TestScapyHelper(TestCase):
     def setUp(self):
         self.ether = Ether(dst="ff:ff:ff:ff:ff:ff",
                            src="00:00:00:00:00:00")
+        self.ether2 = Ether(dst="00:00:00:00:00:00",
+                            src="00:00:00:00:00:00")
+
+    def test_get_diff_should_be_the_same_as_diff(self):
+        fun_diff = diff(self.ether, self.ether2)
+        fun_get_diff = get_diff(self.ether, self.ether2)
+        self.assertEqual(fun_diff, fun_get_diff, "The result of get_diff and diff should be the same")
 
     def test_diff_list_equal(self):
         result = diff("ff ff ff ff ff ff 00 00 00 00 00 00 90 00", "ff ff ff ff ff ff 00 00 00 00 00 00 90 00")
