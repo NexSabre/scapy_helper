@@ -215,8 +215,8 @@ def hex_equal(first, second, show_inequalities=True, **kwargs):
     return True
 
 
-def get_diff(*args):
-    raise NotImplementedError
+def get_diff(first, second):
+    return diff(first, second)
 
 
 def get_diff_status(first, second):
