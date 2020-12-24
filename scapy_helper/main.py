@@ -216,6 +216,7 @@ def hex_equal(first, second, show_inequalities=True, **kwargs):
 
 
 def get_diff(first, second):
+    """This function is the wrapper for the diff. For backward compatibility"""
     return diff(first, second)
 
 
