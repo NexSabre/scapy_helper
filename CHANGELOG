@@ -1,3 +1,6 @@
+v0.5.0
+* Introduce a chexdump functionality (w/ show or ret str/list)
+
 v0.4.5
 * Introduce a batch of improvements. Automatically convert packages to hex format, show str[hex] object when assertion failed. Resolve a few bugs when used with Python 2.7. The clean message format for Python 2.7.
 
