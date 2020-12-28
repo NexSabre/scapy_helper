@@ -5,7 +5,7 @@ from scapy.layers.l2 import Ether
 from scapy_helper.chexdump import chexdump
 
 
-class TestHexdump(unittest.TestCase):
+class TestcHexdump(unittest.TestCase):
     def setUp(self):
         self.packet = Ether(dst="ff:ff:ff:ff:ff:ff",
                             src="00:00:00:00:00:00")
