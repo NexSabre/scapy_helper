@@ -5,6 +5,8 @@ from scapy.layers.l2 import Ether
 
 from scapy_helper.hexdump import hexdump
 
+from scapy.utils import hexdump as scap_hexdump
+
 
 class TestHexdump(unittest.TestCase):
     def setUp(self):
@@ -26,25 +28,27 @@ class TestHexdump(unittest.TestCase):
         expected_result = ['0000ffffffffffff00000000000008004500..............E.',
                            '00100014000100004000fbe8000000007f00......@.........',
                            '00200001..']
-        result = [x.replace(" ", "").replace("\n", "") for x in hexdump(self.packet, dump=True, to_list=True)]
+        result = [x.replace(" ", "").replace("\n", "") for x in hexdump(self.packet_hex, dump=True, to_list=True)]
+
+        expected_result = [x.lower() for x in expected_result]
+        result = [x.lower() for x in result]
 
         self.assertIsInstance(result, list, "Dump should be a list")
         self.assertEqual(expected_result, result, "Dump of the hex should be the same")
 
     def test_hexdump_dump_true(self):
-        expected_result = "0000ffffffffffff00000000000008004500..............E." \
-                          "00100014000100004000fbe8000000007f00......@........." \
-                          "00200001.."
+        expected_result = scap_hexdump(self.packet, dump=True).replace(" ", "").replace("\n", "")
         result = hexdump(self.packet, dump=True).replace(" ", "").replace("\n", "")
 
         self.assertIsInstance(result, str, "Dump should be a string")
-        self.assertEqual(expected_result, result, "Dump of the hex should be the same")
+        self.assertEqual(expected_result.lower(), result.lower(), "Dump of the hex should be the same")
 
     def test_hexdump_dump_true_as_list(self):
-        expected_result = ['0000ffffffffffff00000000000008004500..............E.',
-                           '00100014000100004000fbe8000000007f00......@.........',
-                           '00200001..']
+        expected_result = scap_hexdump(self.packet, dump=True).replace(" ", "").split("\n")
         result = [x.replace(" ", "").replace("\n", "") for x in hexdump(self.packet, dump=True, to_list=True)]
+
+        expected_result = [x.lower() for x in expected_result]
+        result = [x.lower() for x in result]
 
         self.assertIsInstance(result, list, "Dump should be a list")
         self.assertEqual(expected_result, result, "Dump of the hex should be the same")
