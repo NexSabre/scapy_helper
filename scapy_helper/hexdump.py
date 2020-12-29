@@ -10,7 +10,7 @@ def hexdump(packet, dump=False, to_list=False):
         if (j < 32) or (j >= 127):
             return "."
         else:
-            return string(j)
+            return chr(string)
 
     def split(obj, num):
         return [obj[start:start + num]
