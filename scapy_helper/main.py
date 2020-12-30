@@ -56,12 +56,17 @@ def _fill_empty_elements(first, second):
 
 
 def _prepare(obj):
+    def isbytesarray(b):
+        b = obj.split()
+        if len(b) == 1:
+            return get_hex(obj).split()
+        return b
     if hasattr(obj, "hex"):
         return obj.hex().split()
     if not isinstance(obj, str):
         obj = get_hex(obj)
     if isinstance(obj, str):
-        obj = obj.split()
+        obj = isbytesarray(obj)
     return obj
 
 
