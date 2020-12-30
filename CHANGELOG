@@ -1,3 +1,6 @@
+v0.5.1
+* Correct issue with unsupported bytesarray provided to the hexdump
+
 v0.5.0
 * Introduce an chexdump and hexdump functionality (w/ show or ret str/list)
 
