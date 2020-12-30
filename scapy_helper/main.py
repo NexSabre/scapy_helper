@@ -61,6 +61,11 @@ def _prepare(obj):
         if len(b) == 1:
             return get_hex(obj).split()
         return b
+    import sys
+    if sys.version_info > (3, 5):
+        # TODO very naive hack, but should be ok as temporary fix
+        if isinstance(obj, bytes):
+            return isbytesarray(obj)
     if hasattr(obj, "hex"):
         return obj.hex().split()
     if not isinstance(obj, str):
