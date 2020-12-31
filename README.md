@@ -7,7 +7,6 @@ Several features that should help you use Scapy.
 
 ## TL;DR
 ```python
-from scapy.layers.inet import Ether
 from scapy_helper import *
 
 # Dump frame hex
@@ -50,6 +49,44 @@ show_diff(Ether(), second_ether, index=True, empty_char="+")
 # __ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
 #                                                       |
 #       ^2       ^5    ^7 ^8 ^9 10 11       14 15 16 17 | position
+```
+
+## Addons
+Since version v0.5.1, to the _scapy_helper_ was added `chexdump` and `hexdump`. 
+
+chexdump
+```python
+from scapy_helper import chexdump
+
+packet = "\x00\x01".encode()
+
+# chexdump as we know 
+chexdump(packet)
+# 0x00, 0x01
+
+# with return 
+val = chexdump("\x00\x01".encode(), dump=True)
+# or if you need a list
+val = chexdump("\x00\x01".encode(), dump=True, to_list=True)
+```
+
+hexdump
+```python
+from scapy_helper import hexdump
+
+packet = Ether(dst="ff:ff:ff:ff:ff:ff",
+               src="00:00:00:00:00:00")
+
+# chexdump as we know 
+hexdump(packet)
+# 0000   ff ff ff ff ff ff 00 00 00 00 00 00 08 00 45 00   ..............E.
+# 0010   00 14 00 01 00 00 40 00 fb e8 00 00 00 00 7f 00   ......@.........
+# 0020   00 01                                                           ..
+
+# with return 
+val = hexdump(packet, dump=True)
+# or if you need a list
+val = hexdump(packet, dump=True, to_list=True)
 ```
 
 ## Test case usage
