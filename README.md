@@ -54,7 +54,7 @@ show_diff(Ether(), second_ether, index=True, empty_char="+")
 ## Addons
 Since version v0.5.1, to the _scapy_helper_ was added `chexdump` and `hexdump`. 
 
-chexdump
+### chexdump
 ```python
 from scapy_helper import chexdump
 
@@ -70,7 +70,7 @@ val = chexdump("\x00\x01".encode(), dump=True)
 val = chexdump("\x00\x01".encode(), dump=True, to_list=True)
 ```
 
-hexdump
+### hexdump
 ```python
 from scapy_helper import hexdump
 
