@@ -1,3 +1,12 @@
+v0.5.3
+* Resolve some issues
+
+v0.5.2
+* Update README
+* Add chexdump and hexdump into main init.py
+* Add a parity_check (default turn on, will be default off with the next version(
+* Resolve some small issues
+
 v0.5.1
 * Correct issue with unsupported bytesarray provided to the hexdump
 
