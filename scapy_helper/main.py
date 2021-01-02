@@ -82,16 +82,12 @@ def get_hex(frame, uppercase=False):
     :param uppercase: bool: If True letters be UPPERCASE
     :return: str: Hex   
     """
-    def check_parity():
-        if not len(str_hex) % 2:
-            print("Is hex correct? %s" % str_hex)
     if sys.version_info.major == 2:
         import binascii
         str_hex = binascii.b2a_hex(bytes(frame))
     else:
         str_hex = bytes(frame).hex()
 
-    check_parity()
     j = []
     for e, i in enumerate(str_hex):
         if e % 2:
