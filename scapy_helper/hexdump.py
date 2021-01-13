@@ -25,7 +25,7 @@ def hexdump(packet, dump=False, to_list=False):
     for i, line in enumerate(split(processed_packet, 16)):
         console_char = [to_char(int(x, 16)) for x in line]
         if len(line) < 16:
-            line += ["   " for _ in range(16 - len(line))]
+            line += ["  " for _ in range(16 - len(line))]
 
         row.append("%03x0   %s   %s" %
                    (i, ' '.join(line), ''.join(console_char)))
