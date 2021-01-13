@@ -1,3 +1,9 @@
+v0.6.1
+* Resolve an issue with wrongly printed hexdump
+
+v0.6.0
+* Add a packet_helper "shortcut" for "better import" of function (no more scapy name)
+
 v0.5.3
 * Resolve some issues
 
