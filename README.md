@@ -81,7 +81,7 @@ packet = Ether(dst="ff:ff:ff:ff:ff:ff",
 hexdump(packet)
 # 0000   ff ff ff ff ff ff 00 00 00 00 00 00 08 00 45 00   ..............E.
 # 0010   00 14 00 01 00 00 40 00 fb e8 00 00 00 00 7f 00   ......@.........
-# 0020   00 01                                                           ..
+# 0020   00 01                                             ..
 
 # with return 
 val = hexdump(packet, dump=True)
