@@ -1,3 +1,6 @@
+v0.6.2
+* Resolve issue around Py2&Py3 hexdump
+
 v0.6.1
 * Resolve an issue with wrongly printed hexdump
 
