@@ -1,4 +1,4 @@
-from scapy_helper.main import _prepare
+from scapy_helper.main import _prepare, get_hex
 
 
 def hexdump(packet, dump=False, to_list=False):
@@ -17,20 +17,39 @@ def hexdump(packet, dump=False, to_list=False):
                 for start in range(0, len(obj), num)
                 if obj[start:start + num]]
 
-    processed_packet = _prepare(packet)
-    if not processed_packet:
-        return
+    def __process_hexdump():
+        row = []
+        for i, line in enumerate(split(processed_packet, 16)):
+            console_char = [to_char(int(x, 16)) for x in line]
+            if len(line) < 16:
+                line += ["  " for _ in range(16 - len(line))]
 
-    row = []
-    for i, line in enumerate(split(processed_packet, 16)):
-        console_char = [to_char(int(x, 16)) for x in line]
-        if len(line) < 16:
-            line += ["  " for _ in range(16 - len(line))]
+            row.append("%03x0   %s   %s" %
+                       (i, ' '.join(line), ''.join(console_char)))
+        return row
 
-        row.append("%03x0   %s   %s" %
-                   (i, ' '.join(line), ''.join(console_char)))
+    def __alternative_process_hexdump():
+        row = []
+        for i, line in enumerate(split(processed_packet, 16)):
+            console_char = [to_char(x) for x in line]
+            if len(line) < 16:
+                line += ["  " for _ in range(16 - len(line))]
+
+            row.append("%03x0   %s   %s" %
+                       (i, ' '.join(line), ''.join(console_char)))
+        return row
+
+    try:
+        processed_packet = _prepare(packet)
+        if not processed_packet:
+            return
+
+        rows = __process_hexdump()
+    except ValueError:
+        processed_packet = get_hex(packet)
+        rows = __alternative_process_hexdump()
     if dump:
         if to_list:
-            return row
-        return "\n".join(row).rstrip("\n")
-    print("\n".join(row).rstrip("\n"))
+            return rows
+        return "\n".join(rows).rstrip("\n")
+    print("\n".join(rows).rstrip("\n"))
