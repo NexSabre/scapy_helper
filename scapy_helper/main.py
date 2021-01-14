@@ -86,8 +86,10 @@ def get_hex(frame, uppercase=False):
         import binascii
         str_hex = binascii.b2a_hex(bytes(frame))
     else:
-        str_hex = bytes(frame).hex()
-
+        try:
+            str_hex = bytes(frame).hex()
+        except TypeError:
+            str_hex = bytes(frame, encoding="utf-8").hex()
     j = []
     for e, i in enumerate(str_hex):
         if e % 2:
