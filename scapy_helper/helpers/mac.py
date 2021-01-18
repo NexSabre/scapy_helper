@@ -1,5 +1,5 @@
 import re
-import sys
+
 
 def int2mac(integer, upper=False):
     """

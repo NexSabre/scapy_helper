@@ -1,3 +1,6 @@
+v0.7.1
+* Add universal support for the Python2 and Python3 for the mac conversion
+
 v0.7.0
 * Add int2mac and mac2int for easy conversion
 
