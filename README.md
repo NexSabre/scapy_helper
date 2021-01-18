@@ -93,7 +93,7 @@ val = hexdump(packet, dump=True, to_list=True)
 ### int2mac
 Convert an integer value into mac address. Letters by the default are lower case. 
 ```python
-from scapy_helper.helpers.mac import int2mac
+from scapy_helper import int2mac
 
 int2mac(73596036829, upper=True)
 # "00:11:22:AA:66:DD"
@@ -102,7 +102,7 @@ int2mac(73596036829, upper=True)
 ### mac2int
 Convert a mac address into integer value 
 ```python
-from scapy_helper.helpers.mac import mac2int
+from scapy_helper import mac2int
 
 mac2int("00:11:22:AA:66:DD")
 # 73596036829
