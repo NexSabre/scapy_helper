@@ -53,6 +53,7 @@ show_diff(Ether(), second_ether, index=True, empty_char="+")
 
 ## Addons
 Since version v0.5.1, to the _scapy_helper_ was added `chexdump` and `hexdump`. 
+With v0.7.1 we introduce a `mac2int` and `int2mac`. 
 
 ### chexdump
 ```python
@@ -87,6 +88,24 @@ hexdump(packet)
 val = hexdump(packet, dump=True)
 # or if you need a list
 val = hexdump(packet, dump=True, to_list=True)
+```
+
+### int2mac
+Convert an integer value into mac address. Letters by the default are lower case. 
+```python
+from scapy_helper.helpers.mac import int2mac
+
+int2mac(73596036829, upper=True)
+# "00:11:22:AA:66:DD"
+```
+
+### mac2int
+Convert a mac address into integer value 
+```python
+from scapy_helper.helpers.mac import mac2int
+
+mac2int("00:11:22:AA:66:DD")
+# 73596036829
 ```
 
 ## Test case usage
