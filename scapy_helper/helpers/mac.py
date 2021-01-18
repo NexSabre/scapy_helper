@@ -1,5 +1,5 @@
 import re
-
+import sys
 
 def int2mac(integer, upper=False):
     """
@@ -11,8 +11,9 @@ def int2mac(integer, upper=False):
     def format_int():
         return zip(*[iter('{:012x}'.format(integer))] * 2)
 
-    if not isinstance(integer, (int, long)):
-        raise TypeError("Value %s is not a type of integer" % integer)
+    if type(integer).__name__ not in ("int", "long"):
+        # hack: since in the python3, long is not supported
+        raise TypeError("Value %s is not a number" % integer)
 
     mac = ':'.join(['{}{}'.format(a, b)
                     for a, b in format_int()])
