@@ -11,7 +11,7 @@ def int2mac(integer, upper=False):
     def format_int():
         return zip(*[iter('{:012x}'.format(integer))] * 2)
 
-    if not isinstance(integer, int):
+    if not isinstance(integer, (int, long)):
         raise TypeError("Value %s is not a type of integer" % integer)
 
     mac = ':'.join(['{}{}'.format(a, b)
