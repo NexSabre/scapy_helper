@@ -1,3 +1,6 @@
+v0.7.0
+* Add int2mac and mac2int for easy conversion
+
 v0.6.2
 * Resolve issue around Py2&Py3 hexdump
 
