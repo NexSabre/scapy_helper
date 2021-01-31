@@ -6,7 +6,11 @@ def failure(first, second, message):
     raise AssertionError(get_hex(first), get_hex(second), message)
 
 
+# noinspection PyPep8Naming
 class PacketAssert:
+    def __init__(self):
+        pass
+
     @staticmethod
     def assertHexEqual(first, second, message=None):
         if not hex_equal(first, second, show_inequalities=False):
