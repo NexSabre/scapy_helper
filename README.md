@@ -108,6 +108,24 @@ mac2int("00:11:22:AA:66:DD")
 # 73596036829
 ```
 
+### ip2int
+Convert IP address string into int value
+```python
+from scapy_helper import ip2int
+
+ip2int("0.0.0.0")
+# 0
+```
+
+### int2mac
+Convert an int value into IP address string
+```python
+from scapy_helper import int2ip
+
+int2ip(0)
+# 0.0.0.0
+```
+
 ## Test case usage
 ### Extends test class using PacketAssert (since v0.3.1)
 __Note: In the v0.3.0 this class was called HexEqual__
