@@ -21,3 +21,8 @@ class TestIP(TestCase):
             self.ip,
             "Values should be equal"
         )
+
+    def test_int2ip_for_zero(self):
+        self.assertEqual(
+            int2ip(0), "0.0.0.0", "Values should be equal"
+        )
