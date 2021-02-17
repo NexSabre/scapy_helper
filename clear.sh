@@ -1,1 +1,0 @@
-rm -rf build dist scapy_helper.egg-info
