@@ -1,3 +1,6 @@
+v0.8.2
+* Correct issue with printing a diff after the fail of assertHexEqual
+
 v0.8.0
 * Add int2ip and ip2int for easy conversion
 
