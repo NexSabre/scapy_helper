@@ -179,8 +179,8 @@ def show_diff_full(first, second, index=True, extend=False, empty_char="XX"):
             if element == "  ":
                 row[idx] = empty_char
 
-    print(' '.join(first_row), "| len: %sB" % first_row_len_bytes)
-    print(' '.join(second_row), "| len: %sB" % second_row_len_bytes)
+    print("%s | len: %sB" % (' '.join(first_row), first_row_len_bytes))
+    print("%s | len: %sB" % (' '.join(second_row), second_row_len_bytes))
     if index and indexes_of_diff:
         str_bar = "   " * first_row_len_bytes if first_row_len_bytes > second_row_len_bytes else \
             "   " * second_row_len_bytes
