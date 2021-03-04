@@ -2,7 +2,7 @@
 ![CodeQL](https://github.com/NexSabre/scapy_helper/workflows/CodeQL/badge.svg?branch=master)
 [![PyPI version](https://badge.fury.io/py/scapy-helper.svg)](https://badge.fury.io/py/scapy-helper)
 
-# Scapy helper (also know as Packet Helper) 
+# Scapy helper (aka. Packet Helper) 
 This micro library popularizes some handy tricks that make it easy usage of Scapy.
 
 ## TL;DR
