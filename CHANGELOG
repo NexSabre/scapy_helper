@@ -1,3 +1,6 @@
+v0.8.4
+* Add `diff` function to the main __init__.py
+
 v0.8.2
 * Correct issue with printing a diff after the fail of assertHexEqual
 
