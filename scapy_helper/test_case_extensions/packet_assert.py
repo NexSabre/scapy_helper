@@ -24,6 +24,20 @@ class PacketAssert:
             failure(first, second, message)
 
     @staticmethod
+    def assertHexLenEqual(first, second, message=None):
+        len_first, len_second = len(get_hex(first)), len(get_hex(second))
+        if len_first != len_second:
+            show_diff(first, second)
+            failure(first, second, message)
+
+    @staticmethod
+    def assertHexLenNotEqual(first, second, message=None):
+        len_first, len_second = len(get_hex(first)), len(get_hex(second))
+        if len_first == len_second:
+            show_diff(first, second)
+            failure(first, second, message)
+
+    @staticmethod
     def assertBytesEqual(first, second, message=None):
         if not isinstance(first, bytes):
             first = bytes(first)

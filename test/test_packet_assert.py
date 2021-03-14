@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from mock import MagicMock
+from scapy.layers.inet import IP
 from scapy.layers.l2 import Ether
 
 from scapy_helper.test_case_extensions.packet_assert import PacketAssert
@@ -21,6 +22,16 @@ class TestPacketAssert(TestCase, PacketAssert):
     def test_assert_hex_not_equal(self):
         self.assertHexNotEqual(Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00"),
                                Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:aa"))
+
+    def test_assert_hex_len_equal(self):
+        frame = Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00") / IP()
+        longer_frame = Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00") / IP()
+        self.assertHexLenEqual(frame, longer_frame)
+
+    def test_assert_hex_len_not_equal(self):
+        frame = Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00")
+        longer_frame = Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00") / IP()
+        self.assertHexLenNotEqual(frame, longer_frame)
 
     def test_negative_assert_hex_equal(self):
         with self.assertRaises(AssertionError):
