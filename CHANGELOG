@@ -1,3 +1,6 @@
+v0.9.0
+* Add assertHexLenEqual & assertHexLenNotEqual to the PackerAssert
+
 v0.8.4
 * Add `diff` function to the main __init__.py
 
