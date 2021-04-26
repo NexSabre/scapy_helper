@@ -15,8 +15,9 @@ HEXDUMP_VALUE = """
 
 def hstrip(raw=True):
     striped_value = [x.split() for x in pyperclip.paste().split("\n") if x.strip() != ""]
-    # if getenv("SH_DEBUG", False):
-    striped_value = [x.split() for x in HEXDUMP_VALUE.split("\n") if x.strip() != ""]
+    if getenv("SH_DEBUG", False):
+        striped_value = [x.split() for x in HEXDUMP_VALUE.split("\n") if x.strip() != ""]
+
     try:
         index_to_start = int(striped_value[0].index("0000"))
     except ValueError:
