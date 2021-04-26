@@ -10,7 +10,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Nex Sabre",
     author_email="nexsabre@protonmail.com",
-    version="0.9.1",
+    version="0.10.0",
     url="https://github.com/NexSabre/scapy_helper",
     packages=find_packages(),
     classifiers=[
@@ -34,5 +34,10 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     license='MIT',
-    install_requires=["tabulate~=0.8.7"]
+    install_requires=["tabulate~=0.8.7", "pyperclip==1.8.2"],
+    entry_points={
+        'console_scripts': [
+            'hstrip = scapy_helper.utils.hstrip:hstrip',
+        ],
+    },
 )
