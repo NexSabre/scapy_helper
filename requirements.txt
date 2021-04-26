@@ -1,2 +1,3 @@
-tabulate==0.8.7
+tabulate==0.8.9
 mock
+pyperclip==1.8.2
