@@ -34,5 +34,10 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     license='MIT',
-    install_requires=["tabulate~=0.8.7"]
+    install_requires=["tabulate~=0.8.7", "pyperclip==1.8.2"],
+    entry_points={
+        'console_scripts': [
+            'hstrip = scapy_helper.utils.hstrip:hstrip',
+        ],
+    },
 )
