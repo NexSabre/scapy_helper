@@ -53,7 +53,31 @@ show_diff(Ether(), second_ether, index=True, empty_char="+")
 
 ## Addons
 Since version v0.5.1, to the _scapy_helper_ was added `chexdump` and `hexdump`. 
-With v0.7.1 we introduce a `mac2int` and `int2mac`. 
+With v0.7.1 we introduce a `mac2int` and `int2mac`. Version v0.10 bring `hstrip`.
+
+### hstrip
+Since v0.10, allows to convert a Scapies hexdump into clean string-hex format.
+Select a hexdump and copy into clipboard.
+
+```text
+>>> f = Ether()/IP()/TCP()
+>>> hexdump(f)
+0000  FF FF FF FF FF FF 00 00 00 00 00 00 08 00 45 00  ..............E.
+0010  00 28 00 01 00 00 40 06 7C CD 7F 00 00 01 7F 00  .(....@.|.......
+0020  00 01 00 14 00 50 00 00 00 00 00 00 00 00 50 02  .....P........P.
+0030  20 00 91 7C 00 00                                 ..|..
+>>> 
+```
+In command line type `hstrip`
+
+```text
+FF FF FF FF FF FF 00 00 00 00 00 00 08 00 45 00
+00 28 00 01 00 00 40 06 7C CD 7F 00 00 01 7F 00
+00 01 00 14 00 50 00 00 00 00 00 00 00 00 50 02
+20 00 91 7C 00 00
+```
+
+Voilà! You have in your clipboard striped version of hexdump. Now you can paste it into [packetor.com](http://packetor.com)
 
 ### chexdump
 ```python
