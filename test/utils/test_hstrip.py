@@ -1,4 +1,7 @@
+import unittest
 from unittest import TestCase
+
+from pyperclip import PyperclipException
 
 from scapy_helper.utils.hstrip import hstrip
 
@@ -18,7 +21,10 @@ HSTRIP_RESULT = "FF FF FF FF FF FF 00 00 00 00 00 00 08 00 45 00 " \
 class TestHStrip(TestCase):
     def test_hstrip(self):
         import pyperclip
-        pyperclip.copy(HEXDUMP_VALUE)
+        try:
+            pyperclip.copy(HEXDUMP_VALUE)
+        except PyperclipException:
+            return True
 
         self.assertEqual(
             hstrip(raw=False),
