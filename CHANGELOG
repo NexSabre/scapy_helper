@@ -1,3 +1,6 @@
+v0.10.2
+* Disable coping to the clipboard after hexdump was provided to the hstrip()
+
 v0.10.1
 * hstrip extended by the "hexdump" arg, which allow to transfer series of char to clean (clipboard not used)
 
