@@ -42,7 +42,8 @@ def hstrip(raw=True, hexdump=None):
             _list[-1] = _list[-1][:-1]  # remove last element if the list is shorter than 18
 
     oneliner = ' '.join([' '.join(x) for x in _list])
-    pyperclip.copy(oneliner)  # copy to the clipboard
+    if not hexdump:
+        pyperclip.copy(oneliner)  # copy to the clipboard
 
     if not raw:
         return oneliner
