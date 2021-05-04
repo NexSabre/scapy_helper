@@ -13,8 +13,18 @@ HEXDUMP_VALUE = """
 """
 
 
-def hstrip(raw=True):
-    striped_value = [x.split() for x in pyperclip.paste().split("\n") if x.strip() != ""]
+def hstrip(raw=True, hexdump=None):
+    """
+    Clean a Scapies hexdump into more friendly "oneliner"
+    :param raw: If False, return oneliner
+    :param hexdump: String: If you want to manually transfer series of chars
+    :return: String
+    """
+    if not hexdump:
+        striped_value = [x.split() for x in pyperclip.paste().split("\n") if x.strip() != ""]
+    else:
+        striped_value = [x.split() for x in hexdump.split("\n") if x.strip() != ""]
+
     if getenv("SH_DEBUG", False):
         striped_value = [x.split() for x in HEXDUMP_VALUE.split("\n") if x.strip() != ""]
 

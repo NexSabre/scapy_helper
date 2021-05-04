@@ -1,4 +1,3 @@
-import unittest
 from unittest import TestCase
 
 from pyperclip import PyperclipException
@@ -28,5 +27,11 @@ class TestHStrip(TestCase):
 
         self.assertEqual(
             hstrip(raw=False),
+            HSTRIP_RESULT
+        )
+
+    def test_hstrip_from_hexdump(self):
+        self.assertEqual(
+            hstrip(raw=False, hexdump=HEXDUMP_VALUE),
             HSTRIP_RESULT
         )

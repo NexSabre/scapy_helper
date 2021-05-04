@@ -1,3 +1,6 @@
+v0.10.1
+* hstrip extended by the "hexdump" arg, which allow to transfer series of char to clean (clipboard not used)
+
 v0.10
 * Add support for the hstrip
 
