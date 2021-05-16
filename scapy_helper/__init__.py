@@ -5,3 +5,5 @@ from scapy_helper.helpers.mac import mac2int, int2mac
 from scapy_helper.hexdump import hexdump
 from scapy_helper.main import get_hex, show_diff, show_hex, table, hex_equal, diff
 from scapy_helper.test_case_extensions.packet_assert import PacketAssert
+
+from scapy_helper.helpers.to_dict import to_dict, to_list

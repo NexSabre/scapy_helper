@@ -3,19 +3,19 @@ __values = (int, float, str, bytes, bool,
             dict)
 
 
-def _layer2dict(obj):
+def _layer2dict(frame):
     temp_dict = {}
 
-    if not getattr(obj, 'fields_desc', None):
+    if not getattr(frame, 'fields_desc', None):
         return
-    for _field in obj.fields_desc:
-        value = getattr(obj, _field.name)
+    for _field in frame.fields_desc:
+        value = getattr(frame, _field.name)
         if isinstance(value, type(None)):
             value = None
         elif not isinstance(value, __values):
             value = _layer2dict(value)
         temp_dict[_field.name] = value
-    return {obj.name: temp_dict}
+    return {frame.name: temp_dict}
 
 
 def to_dict(packet, layer=0, extend=False):
