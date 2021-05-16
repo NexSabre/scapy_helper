@@ -1,27 +1,25 @@
-_native_value = (int, float, str, bytes, bool, list, tuple, set, dict, type(None))
+__values = (int, float, str, bytes, bool,
+            list, tuple, set,
+            dict)
 
 
 def _layer2dict(obj):
-    d = {}
+    temp_dict = {}
 
     if not getattr(obj, 'fields_desc', None):
         return
-    for f in obj.fields_desc:
-        value = getattr(obj, f.name)
-        if value is type(None):
+    for _field in obj.fields_desc:
+        value = getattr(obj, _field.name)
+        if isinstance(value, type(None)):
             value = None
-
-        if not isinstance(value, _native_value):
+        elif not isinstance(value, __values):
             value = _layer2dict(value)
-        d[f.name] = value
-    return {obj.name: d}
+        temp_dict[_field.name] = value
+    return {obj.name: temp_dict}
 
 
-def to_dict(packet, extend=False):
-    packet.show2()
-
-    for x in range(len(packet.layers())):
-        print()
+def to_dict(packet, layer=0, extend=False):
+    return _layer2dict(packet.getlayer(layer))
 
 
 def to_list(packet, extend=False):
