@@ -1,3 +1,6 @@
+v0.12
+* Add a hhstrip. Similar like a `hstrip` it loads hexdump from the clipboard and prepare link to the PacketHelper.com
+
 v0.11.1
 * Fix test to run correctly w/GitHub Actions
 
