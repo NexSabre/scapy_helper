@@ -1,3 +1,6 @@
+v0.12.1
+* Add more information to the hhstrip command
+
 v0.12
 * Add a hhstrip. Similar like a `hstrip` it loads hexdump from the clipboard and prepare link to the PacketHelper.com
 
