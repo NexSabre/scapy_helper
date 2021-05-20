@@ -10,7 +10,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Nex Sabre",
     author_email="nexsabre@protonmail.com",
-    version="0.11.1",
+    version="0.12.1",
     url="https://github.com/NexSabre/scapy_helper",
     packages=find_packages(),
     classifiers=[
@@ -38,6 +38,7 @@ setup(
     entry_points={
         'console_scripts': [
             'hstrip = scapy_helper.utils.hstrip:hstrip',
+            'hhstrip = scapy_helper.utils.hhstrip:hhstrip'
         ],
     },
 )
