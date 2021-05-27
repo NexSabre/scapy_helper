@@ -30,7 +30,12 @@ class TestShowDiff(TestCase):
 
     def test_show_diff_with_indexes_and_custom_too_long_empty_char(self):
         ether_2 = "ff ff fc ff ff fa 00 11 11 11 11 11 90 00 11 11 00 22"
-        show_diff(self.ether_1, ether_2, index=True, empty_char="+Only Plus Char should be used")
+        show_diff(
+            self.ether_1,
+            ether_2,
+            index=True,
+            empty_char="+Only Plus Char should be used",
+        )
 
     def test_show_diff_with_indexes_and_custom_char_none(self):
         ether_2 = "ff ff fc ff ff fa 00 11 11 11 11 11 90 00 11 11 00 22"

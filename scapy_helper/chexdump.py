@@ -9,6 +9,7 @@ def chexdump(packet, dump=False, to_list=False):
     :param to_list: True if you want a list of hex instead of a string
     :return: None or Str or List
     """
+
     def _add_0x_before(p):
         return ["0x%s" % x for x in p]
 
@@ -22,5 +23,3 @@ def chexdump(packet, dump=False, to_list=False):
         else:
             return ", ".join(_add_0x_before(processed_packet))
     print(", ".join(_add_0x_before(processed_packet)))
-
-

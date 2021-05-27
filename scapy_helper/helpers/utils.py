@@ -1,12 +1,10 @@
-__values = (int, float, str, bytes, bool,
-            list, tuple, set,
-            dict)
+__values = (int, float, str, bytes, bool, list, tuple, set, dict)
 
 
 def _layer2dict(frame):
     temp_dict = {}
 
-    if not getattr(frame, 'fields_desc', None):
+    if not getattr(frame, "fields_desc", None):
         return
     for _field in frame.fields_desc:
         value = getattr(frame, _field.name)

@@ -40,6 +40,7 @@ class Compare:
         :param index: Default=False, If True show position under the differ position
         :return: bool: Return True if packets are NOT EQUAL
         """
+
         def prepare_data(first, second):
             if "=" in first and "=" in second:
                 column_a = first.split("=")
