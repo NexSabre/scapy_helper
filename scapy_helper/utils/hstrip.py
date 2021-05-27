@@ -21,12 +21,16 @@ def hstrip(raw=True, hexdump=None):
     :return: String
     """
     if not hexdump:
-        striped_value = [x.split() for x in pyperclip.paste().split("\n") if x.strip() != ""]
+        striped_value = [
+            x.split() for x in pyperclip.paste().split("\n") if x.strip() != ""
+        ]
     else:
         striped_value = [x.split() for x in hexdump.split("\n") if x.strip() != ""]
 
     if getenv("SH_DEBUG", False):
-        striped_value = [x.split() for x in HEXDUMP_VALUE.split("\n") if x.strip() != ""]
+        striped_value = [
+            x.split() for x in HEXDUMP_VALUE.split("\n") if x.strip() != ""
+        ]
 
     try:
         index_to_start = int(striped_value[0].index("0000"))
@@ -36,18 +40,20 @@ def hstrip(raw=True, hexdump=None):
 
     _list = []
     for x in striped_value:
-        _list.append(x[index_to_start + 1:index_to_start + 17])
+        _list.append(x[index_to_start + 1 : index_to_start + 17])
     else:
         if len(_list[-1]) < 18:
-            _list[-1] = _list[-1][:-1]  # remove last element if the list is shorter than 18
+            _list[-1] = _list[-1][
+                :-1
+            ]  # remove last element if the list is shorter than 18
 
-    oneliner = ' '.join([' '.join(x) for x in _list])
+    oneliner = " ".join([" ".join(x) for x in _list])
     if not hexdump:
         pyperclip.copy(oneliner)  # copy to the clipboard
 
     if not raw:
         return oneliner
-    return '\n'.join([' '.join(x) for x in _list])
+    return "\n".join([" ".join(x) for x in _list])
 
 
 if __name__ == "__main__":

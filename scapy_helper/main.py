@@ -61,7 +61,9 @@ def _prepare(obj):
         if len(b) == 1:
             return get_hex(obj).split()
         return b
+
     import sys
+
     if sys.version_info > (3, 5):
         # TODO very naive hack, but should be ok as temporary fix
         if isinstance(obj, bytes):
@@ -80,10 +82,11 @@ def get_hex(frame, uppercase=False):
     Return a string object of Hex representation of the Scapy's framework
     :param frame: Scapy's Packet Object
     :param uppercase: bool: If True letters be UPPERCASE
-    :return: str: Hex   
+    :return: str: Hex
     """
     if sys.version_info.major == 2:
         import binascii
+
         str_hex = binascii.b2a_hex(bytes(frame))
     else:
         try:
@@ -95,8 +98,8 @@ def get_hex(frame, uppercase=False):
         if e % 2:
             j.append(str_hex[e - 1] + str_hex[e])
     if uppercase:
-        return ' '.join(j).upper()
-    return ' '.join(j).lower()
+        return " ".join(j).upper()
+    return " ".join(j).lower()
 
 
 def show_hex(frame, uppercase=False):
@@ -119,7 +122,7 @@ def _create_diff_indexes_list(indexes, max_len):
     else:
         new_list.append("| position")
 
-    return ' '.join(new_list)
+    return " ".join(new_list)
 
 
 def __process_char(char):
@@ -141,13 +144,23 @@ def show_diff(first, second, index=False, extend=False, empty_char="XX"):
             if element == "  ":
                 row[idx] = empty_char
 
-    print("%s | len: %sB" % (' '.join(first_row), first_row_len_bytes))
-    print("%s | len: %sB" % (' '.join(second_row), second_row_len_bytes))
+    print("%s | len: %sB" % (" ".join(first_row), first_row_len_bytes))
+    print("%s | len: %sB" % (" ".join(second_row), second_row_len_bytes))
     if index and indexes_of_diff:
-        str_bar = "   " * first_row_len_bytes if first_row_len_bytes > second_row_len_bytes else \
-            "   " * second_row_len_bytes
-        print("%s|\n%s" % (str_bar, _create_diff_indexes_list(indexes_of_diff, max((first_row_len_bytes,
-                                                                                    second_row_len_bytes)))))
+        str_bar = (
+            "   " * first_row_len_bytes
+            if first_row_len_bytes > second_row_len_bytes
+            else "   " * second_row_len_bytes
+        )
+        print(
+            "%s|\n%s"
+            % (
+                str_bar,
+                _create_diff_indexes_list(
+                    indexes_of_diff, max((first_row_len_bytes, second_row_len_bytes))
+                ),
+            )
+        )
 
     if extend:
         more_info = []
@@ -179,13 +192,23 @@ def show_diff_full(first, second, index=True, extend=False, empty_char="XX"):
             if element == "  ":
                 row[idx] = empty_char
 
-    print("%s | len: %sB" % (' '.join(first_row), first_row_len_bytes))
-    print("%s | len: %sB" % (' '.join(second_row), second_row_len_bytes))
+    print("%s | len: %sB" % (" ".join(first_row), first_row_len_bytes))
+    print("%s | len: %sB" % (" ".join(second_row), second_row_len_bytes))
     if index and indexes_of_diff:
-        str_bar = "   " * first_row_len_bytes if first_row_len_bytes > second_row_len_bytes else \
-            "   " * second_row_len_bytes
-        print("%s|\n%s" % (str_bar, _create_diff_indexes_list(indexes_of_diff, max((first_row_len_bytes,
-                                                                                    second_row_len_bytes)))))
+        str_bar = (
+            "   " * first_row_len_bytes
+            if first_row_len_bytes > second_row_len_bytes
+            else "   " * second_row_len_bytes
+        )
+        print(
+            "%s|\n%s"
+            % (
+                str_bar,
+                _create_diff_indexes_list(
+                    indexes_of_diff, max((first_row_len_bytes, second_row_len_bytes))
+                ),
+            )
+        )
 
     if extend:
         more_info = []

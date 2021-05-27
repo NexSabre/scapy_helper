@@ -65,11 +65,14 @@ class PacketAssert:
             failure(first, second, message)
 
         if isinstance(positions, int):
-            if len(differences_at_position) != 1 or (positions not in differences_at_position):
+            if len(differences_at_position) != 1 or (
+                positions not in differences_at_position
+            ):
                 show_diff(first, second, index=True)
                 failure(first, second, message)
         elif isinstance(positions, (list, tuple)):
-            if not set(positions).issubset(set(differences_at_position)) or set(positions) < set(
-                    differences_at_position):
+            if not set(positions).issubset(set(differences_at_position)) or set(
+                positions
+            ) < set(differences_at_position):
                 show_diff(first, second, index=True)
                 failure(first, second, message)

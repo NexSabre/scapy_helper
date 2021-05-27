@@ -10,21 +10,13 @@ class TestMac(TestCase):
 
     def test_int_to_mac(self):
         self.assertEqual(
-            int2mac(self.int_mac),
-            self.str_mac.lower(),
-            "Values should be equal"
+            int2mac(self.int_mac), self.str_mac.lower(), "Values should be equal"
         )
 
     def test_int_to_mac_upper(self):
         self.assertEqual(
-            int2mac(self.int_mac, upper=True),
-            self.str_mac,
-            "Values should be equal"
+            int2mac(self.int_mac, upper=True), self.str_mac, "Values should be equal"
         )
 
     def test_mac_to_int(self):
-        self.assertEqual(
-            mac2int(self.str_mac),
-            self.int_mac,
-            "Values should be equal"
-        )
+        self.assertEqual(mac2int(self.str_mac), self.int_mac, "Values should be equal")
