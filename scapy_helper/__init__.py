@@ -8,3 +8,5 @@ from scapy_helper.test_case_extensions.packet_assert import PacketAssert
 
 from scapy_helper.helpers.to_dict import to_dict
 from scapy_helper.helpers.to_list import to_list
+
+from scapy_helper.test_case_extensions.pytest_assert import *

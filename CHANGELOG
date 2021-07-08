@@ -1,3 +1,7 @@
+v0.13.0
+* Add assertion definitions: "assert_hex_equal", "assert_hex_not_equal", "assert_hex_len_equal", "assert_hex_len_not_equal",
+"assert_bytes_equal", "assert_bytes_not_equal"
+
 v0.12.1
 * Add more information to the hhstrip command
 

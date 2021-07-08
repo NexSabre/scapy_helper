@@ -204,6 +204,26 @@ int2ip(0)
 
 ## Test case usage
 
+### Use definition in Pytest
+You can use functions in your pytest (if you do not use a unittest or do not want to inherit by the `PacketAssert`)
+  * `assert_hex_equal`
+  * `assert_hex_not_equal`
+  * `assert_hex_len_equal` 
+  * `assert_hex_len_not_equal`
+  * `assert_bytes_equal`  
+  * `assert_bytes_not_equal`
+
+Example of usage:
+```python
+from scapy_helper import assert_hex_equal
+
+
+class TestExample:
+    def test_example(self):
+        assert_hex_equal(Ether(), Ether("10.10.10.10"))
+```
+
+
 ### Extends test class using PacketAssert (since v0.3.1)
 
 __Note: In the v0.3.0 this class was called HexEqual__
@@ -211,6 +231,7 @@ __Note: In the v0.3.0 this class was called HexEqual__
 You can use assertHexEqual/assertHexNotEqual and assertBytesEqual/assertBytesNotEqual in the tests. When the assertion
 fails, wrapper produces information about the frames (in hex).
 
+Example of usage: 
 ```python
 import unittest
 from scapy_helper.test_case_extensions.packet_assert import PacketAssert
