@@ -2,11 +2,9 @@ import unittest
 
 from scapy.layers.inet import IP
 from scapy.layers.l2 import Ether
-
-from scapy_helper import get_hex
-from scapy_helper.hexdump import hexdump
-
 from scapy.utils import hexdump as scap_hexdump
+
+from scapy_helper.hexdump import hexdump
 
 
 class TestHexdump(unittest.TestCase):
