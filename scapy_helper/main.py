@@ -133,6 +133,13 @@ def __process_char(char):
 
 
 def show_diff(first, second, index=False, extend=False, empty_char="XX"):
+    def get_name(module):
+        if isinstance(module, str):
+            return "hex"
+        return module.__module__.split(".")[0]
+
+    _first_module_name, _second_module_name = get_name(first), get_name(second)
+
     first_row, second_row, indexes_of_diff = diff(first, second)
     first_row_len_bytes = count_bytes(first_row)
     second_row_len_bytes = count_bytes(second_row)
@@ -144,8 +151,11 @@ def show_diff(first, second, index=False, extend=False, empty_char="XX"):
             if element == "  ":
                 row[idx] = empty_char
 
-    print("%s | len: %sB" % (" ".join(first_row), first_row_len_bytes))
-    print("%s | len: %sB" % (" ".join(second_row), second_row_len_bytes))
+    max_fill = max((len(_first_module_name), len(_second_module_name)))
+
+    print("%s | %s | len: %sB" % (_first_module_name.ljust(max_fill), " ".join(first_row), first_row_len_bytes))
+    print("%s | %s | len: %sB" % (_second_module_name.ljust(max_fill), " ".join(second_row), second_row_len_bytes))
+
     if index and indexes_of_diff:
         str_bar = (
             "   " * first_row_len_bytes
@@ -153,13 +163,13 @@ def show_diff(first, second, index=False, extend=False, empty_char="XX"):
             else "   " * second_row_len_bytes
         )
         print(
-            "%s|\n%s"
-            % (
-                str_bar,
-                _create_diff_indexes_list(
-                    indexes_of_diff, max((first_row_len_bytes, second_row_len_bytes))
-                ),
-            )
+                "%s|\n%s"
+                % (
+                    str_bar,
+                    _create_diff_indexes_list(
+                        indexes_of_diff, max((first_row_len_bytes, second_row_len_bytes))
+                    ),
+                )
         )
 
     if extend:
@@ -201,13 +211,13 @@ def show_diff_full(first, second, index=True, extend=False, empty_char="XX"):
             else "   " * second_row_len_bytes
         )
         print(
-            "%s|\n%s"
-            % (
-                str_bar,
-                _create_diff_indexes_list(
-                    indexes_of_diff, max((first_row_len_bytes, second_row_len_bytes))
-                ),
-            )
+                "%s|\n%s"
+                % (
+                    str_bar,
+                    _create_diff_indexes_list(
+                        indexes_of_diff, max((first_row_len_bytes, second_row_len_bytes))
+                    ),
+                )
         )
 
     if extend:
