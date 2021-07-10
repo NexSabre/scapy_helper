@@ -29,8 +29,8 @@ show_diff(Ether(), second_ether)
 # WARN:: Frame len is not the same
 # WARN:: Second row is longer by the 4B
 #
-# __ __ ff __ __ ff __ 00 00 00 00 00 __ __ XX XX XX XX | len: 14B
-# __ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
+# scapy | __ __ ff __ __ ff __ 00 00 00 00 00 __ __ XX XX XX XX | len: 14B
+# hex   | __ __ fc __ __ fa __ 11 11 11 11 11 __ __ 11 11 00 22 | len: 18B
 #
 # Not equal at 11B
 
