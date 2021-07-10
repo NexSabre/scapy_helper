@@ -1,3 +1,6 @@
+v0.14.0
+* Add information about origin of the module in `show_diff`. It should help in recognition of the packets.
+
 v0.13.0
 * Add assertion definitions: "assert_hex_equal", "assert_hex_not_equal", "assert_hex_len_equal", "assert_hex_len_not_equal",
 "assert_bytes_equal", "assert_bytes_not_equal"
