@@ -5,7 +5,7 @@ from scapy.layers.l2 import Ether
 from scapy.utils import chexdump
 
 from scapy_helper import get_hex, show_diff
-from scapy_helper.main import diff, hex_equal, _prepare, get_diff
+from scapy_helper.main import _prepare, diff, get_diff, hex_equal
 
 
 class TestScapyHelper(TestCase):
