@@ -1,5 +1,5 @@
 from scapy_helper import hex_equal, show_diff
-from scapy_helper.main import show_diff_full, diff, get_hex
+from scapy_helper.main import diff, get_hex, show_diff_full
 
 
 def failure(first, second, message):

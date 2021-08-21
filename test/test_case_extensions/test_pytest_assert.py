@@ -2,9 +2,9 @@ from unittest import TestCase
 
 from scapy_helper.test_case_extensions.pytest_assert import (
     assert_hex_equal,
-    assert_hex_not_equal,
     assert_hex_len_equal,
     assert_hex_len_not_equal,
+    assert_hex_not_equal,
 )
 
 DEFAULT_HEX = (
