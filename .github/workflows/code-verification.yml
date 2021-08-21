@@ -14,4 +14,4 @@ jobs:
           black --check -t py27 .
       - name: Verify imports
         run: |
-          isort --check packet_helper/ scapy_helper/ test/
+          isort --check packet_helper/ scapy_helper/ test/ --profile black
