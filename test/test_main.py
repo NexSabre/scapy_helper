@@ -183,7 +183,7 @@ class TestScapyHelper(TestCase):
                 self.ether,
                 "ff ff ff ff ff ff 0a 00 00 00 00 00 90 00",
                 show_inequalities=False,
-                **options
+                **options,
             )
         )
 
