@@ -8,6 +8,7 @@ clean:
 format:
 	@echo "Formatting..."
 	python -m black -t py27 .
+	python -m isort packet_helper/ scapy_helper/ test/ --profile black
 	@echo "Formatting... Done"
 
 build:
