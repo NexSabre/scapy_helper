@@ -16,6 +16,9 @@ def int2mac(integer, upper=False):
         # hack: since in the python3, long is not supported
         raise TypeError("Value %s is not a number" % integer)
 
+    if integer < 0 or integer > 281474976710655:
+        raise ValueError("Value %s is out of the range of MAC" % integer)
+
     mac = ":".join(["{}{}".format(a, b) for a, b in format_int()])
     if upper:
         return mac.upper()
