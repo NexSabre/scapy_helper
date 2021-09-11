@@ -9,6 +9,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install black isort mypy
+          python -m mypy --install-types
       - name: Verify code (w/Black)
         run: |
           black --check -t py36 .
