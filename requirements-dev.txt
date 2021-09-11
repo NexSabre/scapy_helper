@@ -5,3 +5,4 @@ types-mock~=4.0.1
 types-tabulate~=0.8.2
 isort~=5.9.3
 black~=21.8b0
+mypy~=0.910
