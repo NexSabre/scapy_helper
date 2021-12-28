@@ -1,0 +1,26 @@
+name: Test
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  check_version:
+    name: Check local version with the available at pypi.org
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check version
+        run: |
+          python tools/version_checker.py
+  push_to_pypi:
+    name: Push .whl & .tar.gz to the pypi.org
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clean, Build & Publish package
+        env:
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+        run: |
+          python -m pip install -r requirements-dev.txt
+          python -m pip install setuptools wheel twine
+          make publish
