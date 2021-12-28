@@ -10,9 +10,7 @@ jobs:
     steps:
       - name: Check version
         run: |
-          pwd
-          ls
-          python tools/version_checker.py
+          make version
   push_to_pypi:
     name: Push .whl & .tar.gz to the pypi.org
     if: ${{ github.ref == 'refs/heads/main' }}

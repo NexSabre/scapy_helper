@@ -20,3 +20,7 @@ build:
 .PHONY: publish
 publish: clean format build
 	twine upload dist/*
+
+.PHONY: version
+version:
+    python tools/version_checker.py
