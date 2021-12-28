@@ -10,7 +10,9 @@ def local_version():
 
 
 def latest_version_on_pypi():
-    pypi_info = requests.request("get", "https://pypi.org/pypi/scapy-helper/json").json()  # type: Dict[str, Any]
+    pypi_info = requests.request(
+        "get", "https://pypi.org/pypi/scapy-helper/json"
+    ).json()  # type: Dict[str, Any]
     return pypi_info.get("info").get("version")
 
 
