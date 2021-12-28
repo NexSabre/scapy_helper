@@ -34,15 +34,14 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     license="MIT",
     install_requires=["tabulate~=0.8.7", "pyperclip==1.8.2"],
     entry_points={
         "console_scripts": [
-            "hstrip = scapy_helper.tools.hstrip:hstrip",
-            "hhstrip = scapy_helper.tools.hhstrip:hhstrip",
+            "hstrip = scapy_helper.utils.hstrip:hstrip",
+            "hhstrip = scapy_helper.utils.hhstrip:hhstrip",
         ],
     },
 )
