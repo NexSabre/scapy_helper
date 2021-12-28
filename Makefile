@@ -23,4 +23,4 @@ publish: clean format build
 
 .PHONY: version
 version:
-    python tools/version_checker.py
+	python tools/version_checker.py
