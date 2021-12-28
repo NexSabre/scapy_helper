@@ -1,7 +1,10 @@
 from setuptools import find_packages, setup
 
 with open("./README.md", "r") as fh:
-    long_description = fh.read()
+    long_description = fh.read()  # type: str
+
+with open("./VERSION", "r") as vr:
+    version = vr.read()  # type: str
 
 setup(
     name="scapy_helper",
@@ -10,7 +13,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Nex Sabre",
     author_email="nexsabre@protonmail.com",
-    version="0.14.3",
+    version=version,
     url="https://github.com/NexSabre/scapy_helper",
     packages=find_packages(),
     classifiers=[
@@ -31,6 +34,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     license="MIT",
