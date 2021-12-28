@@ -4,7 +4,7 @@ import requests  # noqa
 
 
 def local_version():
-    with open("./VERSION") as vr:
+    with open("../VERSION") as vr:
         version = vr.read()  # type: str
         return version.lstrip().rstrip()
 
