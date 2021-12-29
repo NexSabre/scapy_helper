@@ -53,12 +53,16 @@ jobs:
           python -m pip install -r requirements-dev.txt
           python -m pip install setuptools wheel twine black[python27] isort
 #          make publish
+      - name: Retrieve version
+        run: |
+          echo "::set-output name=VERSION::$(cat VERSION)"
+        id: version
       - name: Create GitHub release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: cat VERSION
+          VERSION: ${{ steps.version.outputs.TAG_NAME }}
         with:
           tag_name: ${{ env.VERSION }}
           release_name: Release ${{ env.VERSION }}
