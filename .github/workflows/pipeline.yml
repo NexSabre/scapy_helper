@@ -76,6 +76,6 @@ jobs:
           VERSION: ${{ steps.version.outputs.VERSION }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ${{ format('./dist/scapy_helper-{0}.tar.gz', env.VERSION) }}
+          asset_path: ${{ format('dist/scapy_helper-{0}.tar.gz', env.VERSION) }}
           asset_name: ${{ format('scapy_helper-{0}.tar.gz', env.VERSION) }}
           asset_content_type: application/tar
