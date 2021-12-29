@@ -63,6 +63,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ steps.version.outputs.VERSION }}
+          FILENAME 
         with:
           tag_name: ${{ env.VERSION }}
           release_name: scapy_helper v${{ env.VERSION }}
@@ -73,8 +74,10 @@ jobs:
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ASSET_PATH: ./dist/scapy_helper-${{ env.VERSION }}.tar.gz
+          ASSET_NAME: scapy_helper-${{ env.VERSION }}.tar.gz
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./dist/scapy_helper-${{ env.VERSION }}.tar.gz
-          asset_name: scapy_helper-${{ env.VERSION }}.tar.gz*
+          asset_path: ${{ env.ASSET_PATH }}
+          asset_name: ${{ env.ASSET_NAME }}
           asset_content_type: application/tar
