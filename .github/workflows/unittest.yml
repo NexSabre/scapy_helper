@@ -29,4 +29,4 @@ jobs:
         python -m unittest discover test/
     - name: Build a wheel package
       run: |
-        pip install setuptools wheel && python setup.py sdist bdist_wheel
+        python -m pip install setuptools wheel && python setup.py sdist bdist_wheel
