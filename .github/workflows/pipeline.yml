@@ -13,7 +13,7 @@ jobs:
         run: |
           black --check -t py27 .
   build:
-    name: Build & test
+    name: Build & test with Py
     runs-on: ubuntu-latest
     strategy:
       matrix:
