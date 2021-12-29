@@ -2,5 +2,4 @@
 
 mock~=3.0.5
 requests==2.22.0
-black==21.9b0
 isort==5.9.3
