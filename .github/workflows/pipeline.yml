@@ -53,6 +53,7 @@ jobs:
           python -m pip install -r requirements-dev.txt
           python -m pip install setuptools wheel twine black[python27] isort
 #          make publish
+          make build
       - name: Retrieve version
         run: |
           echo "::set-output name=VERSION::$(cat VERSION)"
