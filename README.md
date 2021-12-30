@@ -1,6 +1,4 @@
-[![Verify code (using Black)](https://github.com/NexSabre/scapy_helper/actions/workflows/code-verification.yml/badge.svg)](https://github.com/NexSabre/scapy_helper/actions/workflows/code-verification.yml)
-![Test](https://github.com/NexSabre/scapy_helper/workflows/Test/badge.svg?branch=master)
-![CodeQL](https://github.com/NexSabre/scapy_helper/workflows/CodeQL/badge.svg?branch=master)
+[![push pipeline](https://github.com/NexSabre/scapy_helper/actions/workflows/pipeline.yml/badge.svg)](https://github.com/NexSabre/scapy_helper/actions/workflows/pipeline.yml)
 [![PyPI version](https://badge.fury.io/py/scapy-helper.svg)](https://badge.fury.io/py/scapy-helper)
 
 # Scapy helper (aka. Packet Helper)
