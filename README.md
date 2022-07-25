@@ -1,5 +1,6 @@
 [![push pipeline](https://github.com/NexSabre/scapy_helper/actions/workflows/pipeline.yml/badge.svg)](https://github.com/NexSabre/scapy_helper/actions/workflows/pipeline.yml)
 [![PyPI version](https://badge.fury.io/py/scapy-helper.svg)](https://badge.fury.io/py/scapy-helper)
+[![Downloads](https://pepy.tech/badge/scapy-helper)](https://pepy.tech/project/scapy-helper)
 
 # Scapy helper (aka. Packet Helper)
 
