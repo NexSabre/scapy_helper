@@ -11,7 +11,7 @@ jobs:
           pip install black[python27] isort
       - name: Verify code
         run: |
-          black --check -t py27 .
+          black --check -t py36 .
   build:
     name: Build & test with Py
     runs-on: ubuntu-latest
