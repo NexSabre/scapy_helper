@@ -1,8 +1,7 @@
 from unittest import TestCase
 
 from mock import MagicMock
-from scapy.layers.l2 import Ether
-from scapy.utils import chexdump
+from scapy.all import Ether, chexdump
 
 from scapy_helper import get_hex, show_diff
 from scapy_helper.main import _prepare, diff, get_diff, hex_equal
@@ -183,7 +182,7 @@ class TestScapyHelper(TestCase):
                 self.ether,
                 "ff ff ff ff ff ff 0a 00 00 00 00 00 90 00",
                 show_inequalities=False,
-                **options
+                **options,
             )
         )
 

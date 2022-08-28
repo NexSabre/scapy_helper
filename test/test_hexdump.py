@@ -1,7 +1,7 @@
 import unittest
+from test._utils import normalize
 
-from scapy.layers.inet import IP
-from scapy.layers.l2 import Ether
+from scapy.all import IP, Ether
 from scapy.utils import hexdump as scap_hexdump
 
 from scapy_helper.hexdump import hexdump
@@ -22,7 +22,7 @@ class TestHexdump(unittest.TestCase):
             "00100014000100004000fbe8000000007f00......@........."
             "00200001.."
         )
-        result = hexdump(self.packet_hex, dump=True).replace(" ", "").replace("\n", "")
+        result = normalize(hexdump(self.packet_hex, dump=True))
         hexdump(self.packet_hex)
         self.assertEqual(expected_result, result, "String should be the same")
 
@@ -33,8 +33,7 @@ class TestHexdump(unittest.TestCase):
             "00200001..",
         ]
         result = [
-            x.replace(" ", "").replace("\n", "")
-            for x in hexdump(self.packet_hex, dump=True, to_list=True)
+            normalize(x) for x in hexdump(self.packet_hex, dump=True, to_list=True)
         ]
 
         expected_result = [x.lower() for x in expected_result]
@@ -53,10 +52,8 @@ class TestHexdump(unittest.TestCase):
         )
 
     def test_hexdump_dump_true(self):
-        expected_result = (
-            scap_hexdump(self.packet, dump=True).replace(" ", "").replace("\n", "")
-        )
-        result = hexdump(self.packet, dump=True).replace(" ", "").replace("\n", "")
+        expected_result = normalize(scap_hexdump(self.packet, dump=True))
+        result = normalize(hexdump(self.packet, dump=True))
 
         self.assertIsInstance(result, str, "Dump should be a string")
         self.assertEqual(
@@ -69,10 +66,7 @@ class TestHexdump(unittest.TestCase):
         expected_result = (
             scap_hexdump(self.packet, dump=True).replace(" ", "").split("\n")
         )
-        result = [
-            x.replace(" ", "").replace("\n", "")
-            for x in hexdump(self.packet, dump=True, to_list=True)
-        ]
+        result = [normalize(x) for x in hexdump(self.packet, dump=True, to_list=True)]
 
         expected_result = [x.lower() for x in expected_result]
         result = [x.lower() for x in result]

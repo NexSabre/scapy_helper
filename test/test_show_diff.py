@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from scapy.layers.l2 import Ether
+from scapy.all import Ether
 
 from scapy_helper.main import show_diff
 

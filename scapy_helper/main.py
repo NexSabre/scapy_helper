@@ -1,4 +1,5 @@
 import sys
+from typing import Any
 
 from scapy_helper.helpers.depracated import deprecated
 
@@ -39,7 +40,7 @@ def diff(*args, **kwargs):
     return result_list[0], result_list[1], diff_indexes
 
 
-def _fill_empty_elements(first, second):
+def _fill_empty_elements(first, second) -> None:
     if len(first) != len(second):
         print("WARN:: Frame len is not the same")
 
@@ -47,12 +48,13 @@ def _fill_empty_elements(first, second):
         len_second = len(second)
         if len_first > len_second:
             print("WARN:: First row is longer by the %sB\n" % (len_first - len_second))
-            for x in range(len_first - len_second):
+            for _ in range(len_first - len_second):
                 second.append("  ")
         else:
             print("WARN:: Second row is longer by the %sB\n" % (len_second - len_first))
-            for x in range(len_second - len_first):
+            for _ in range(len_second - len_first):
                 first.append("  ")
+    return None
 
 
 def _prepare(obj):
@@ -61,8 +63,6 @@ def _prepare(obj):
         if len(b) == 1:
             return get_hex(obj).split()
         return b
-
-    import sys
 
     if sys.version_info > (3, 5):
         # TODO very naive hack, but should be ok as temporary fix
@@ -77,24 +77,19 @@ def _prepare(obj):
     return obj
 
 
-def get_hex(frame, uppercase=False):
+def get_hex(frame: Any, uppercase: bool = False) -> str:
     """
     Return a string object of Hex representation of the Scapy's framework
     :param frame: Scapy's Packet Object
     :param uppercase: bool: If True letters be UPPERCASE
     :return: str: Hex
     """
-    if sys.version_info.major == 2:
-        import binascii
-
-        str_hex = binascii.b2a_hex(bytes(frame))
-    else:
-        try:
-            str_hex = bytes(frame).hex()
-        except TypeError:
-            str_hex = bytes(frame, encoding="utf-8").hex()
+    try:
+        str_hex = bytes(frame).hex()
+    except TypeError:
+        str_hex = bytes(frame, encoding="utf-8").hex()
     j = []
-    for e, i in enumerate(str_hex):
+    for e, _ in enumerate(str_hex):
         if e % 2:
             j.append(str_hex[e - 1] + str_hex[e])
     if uppercase:
@@ -102,9 +97,10 @@ def get_hex(frame, uppercase=False):
     return " ".join(j).lower()
 
 
-def show_hex(frame, uppercase=False):
+def show_hex(frame, uppercase: bool = False) -> None:
     """Print a hex representation of the Scapy's object"""
     print(get_hex(frame, uppercase=uppercase))
+    return None
 
 
 def _create_diff_indexes_list(indexes, max_len):
@@ -283,7 +279,7 @@ def get_diff_status(first, second):
 
 @deprecated
 def table(first, second):
-    f, s, status = diff(first, second)
+    _, _, status = diff(first, second)
     show_diff(first, second)
     f_details = first.show(dump=True).split("\n")
     s_details = second.show(dump=True).split("\n")

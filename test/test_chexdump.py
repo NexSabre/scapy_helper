@@ -1,6 +1,6 @@
 import unittest
 
-from scapy.layers.l2 import Ether
+from scapy.all import Ether
 
 from scapy_helper.chexdump import chexdump
 

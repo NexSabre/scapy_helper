@@ -1,7 +1,7 @@
 from os import getenv
 
 try:
-    import pyperclip
+    import pyperclip  # type: ignore
 except ImportError:
     print("Missing pyperclip: pip install pyperclip")
 

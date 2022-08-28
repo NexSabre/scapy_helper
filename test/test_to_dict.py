@@ -1,7 +1,6 @@
 from unittest import TestCase
 
-from scapy.layers.inet import IP, TCP
-from scapy.layers.l2 import Ether
+from scapy.all import IP, TCP, Ether
 
 from scapy_helper.helpers.to_dict import to_dict
 

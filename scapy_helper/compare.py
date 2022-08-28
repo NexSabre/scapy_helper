@@ -1,28 +1,30 @@
+from typing import Any, Optional, Tuple
+
 from tabulate import tabulate
 
 from scapy_helper.main import get_hex, show_diff
 
 
 class Compare:
-    def __init__(self, first, second):
+    def __init__(self, first: Any, second: Any):
         self.first = first
         self.second = second
 
-    def equal(self):
+    def equal(self) -> bool:
         """
         Return true if booth elements are equal
         :return: bool
         """
         return not self.diff()
 
-    def hex(self):
+    def hex(self) -> Tuple[str, str]:
         """
         Return tuple with hex elements
         :return: Tuple(str, str)
         """
         return get_hex(self.first), get_hex(self.second)
 
-    def diff(self):
+    def diff(self) -> bool:
         """
         Show differences between two packets
         :return: bool: Return True if packets are NOT EQUAL
@@ -30,18 +32,20 @@ class Compare:
         print("This is temporary -- will be changed in the future")
         return show_diff(self.first, self.second)
 
-    def tdiff(self):
+    def tdiff(self) -> bool:
         """[Shortcut] Wrapper for the table_diff"""
-        self.table_diff()
+        return self.table_diff()
 
-    def table_diff(self, index=False):
+    def table_diff(self, index: bool = False) -> bool:
         """
         Print a difference and print table information about packets
         :param index: Default=False, If True show position under the differ position
         :return: bool: Return True if packets are NOT EQUAL
         """
 
-        def prepare_data(first, second):
+        def prepare_data(
+            first, second
+        ) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[str]]:
             if "=" in first and "=" in second:
                 column_a = first.split("=")
                 column_b = second.split("=")
@@ -55,7 +59,7 @@ class Compare:
         self._print_table(prepare_data)
         return status
 
-    def _print_table(self, prepare_data):
+    def _print_table(self, prepare_data) -> None:
         """
         Print table base on prepared data
         :param prepare_data:
