@@ -24,6 +24,7 @@ def old_method(frame):
     )
 
 
+# FIXME change the name of fixtures
 class TestScapyHelper:
     def test_get_diff_should_be_the_same_as_diff(
         self, ether_1: Packet, ether_2: Packet
@@ -116,21 +117,22 @@ class TestScapyHelper:
             [6],
         ), "Results should be equal"
 
-    @pytest.mark.parametrize("value", (("00 11", "00 11", "00 00"), ("00 11",)))
+    @pytest.mark.parametrize("value", (("00 11", "00 11", "00 00"), ("00 11")))
     def test_diff_refactor(self, value):
+        print(value)
         with pytest.raises(NotImplementedError):
             diff(*value)
 
     def test_get_hex(self, ether_1: Packet):
         assert get_hex(ether_1) == "ff ff ff ff ff ff 00 00 00 00 00 00 90 00"
 
-    def test_get_hex_uppercase(self):
+    def test_get_hex_uppercase(self, ether_1: Packet):
         assert (
             get_hex(ether_1, uppercase=True)
             == "FF FF FF FF FF FF 00 00 00 00 00 00 90 00"
         )
 
-    def test_show_diff(self):
+    def test_show_diff(self, ether_1: Packet):
         ether_wrong = "ff ff ff ff ff ff 00 00 00 00 aa 00 90 00"
         first_row, second_row, status = diff(ether_1, ether_wrong)
 

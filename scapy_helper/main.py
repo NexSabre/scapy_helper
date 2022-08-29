@@ -1,5 +1,5 @@
 import sys
-from typing import Any
+from typing import Any, Optional
 
 from scapy_helper.helpers.depracated import deprecated
 
@@ -121,14 +121,16 @@ def _create_diff_indexes_list(indexes, max_len):
     return " ".join(new_list)
 
 
-def __process_char(char):
+def __process_char(char: Optional[str] = "") -> str:
     multiplier = 2
     if not char or not isinstance(char, str):
         return "X" * multiplier
     return char[0] * multiplier
 
 
-def show_diff(first, second, index=False, extend=False, empty_char="XX"):
+def show_diff(
+    first, second, index: bool = False, extend: bool = False, empty_char: str = "XX"
+) -> None:
     def get_name(module):
         if isinstance(module, str):
             return "hex"
