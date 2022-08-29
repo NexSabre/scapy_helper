@@ -1,12 +1,9 @@
-from unittest import TestCase
-
 from scapy.all import IP, TCP, Ether
-
 from scapy_helper import to_list
 
 
-class TestToList(TestCase):
-    def test_simple_list(self):
+class TestToList:
+    def test_simple_list(self) -> None:
         packet = (
             Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00")
             / IP(src="0.0.0.0", dst="127.0.0.1")
@@ -56,5 +53,5 @@ class TestToList(TestCase):
 
         to_list_result = to_list(packet)
 
-        self.assertTrue(isinstance(to_list_result, list))
-        self.assertEqual(to_list_result, packet_result)
+        assert isinstance(to_list_result, list)
+        assert to_list_result == packet_result

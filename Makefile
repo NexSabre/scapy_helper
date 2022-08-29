@@ -23,7 +23,7 @@ publish: clean format build
 
 .PHONY: test
 test:
-	python -m unittest discover test/
+	python -m pytest
 
 .PHONY: test-mypy
 test-mypy:

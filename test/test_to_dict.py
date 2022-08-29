@@ -1,12 +1,9 @@
-from unittest import TestCase
-
 from scapy.all import IP, TCP, Ether
-
 from scapy_helper.helpers.to_dict import to_dict
 
 
-class TestToDict(TestCase):
-    def test_simple_dict(self):
+class TestToDict:
+    def test_simple_dict(self) -> None:
         packet = (
             Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00")
             / IP(src="0.0.0.0", dst="127.0.0.1")
@@ -22,8 +19,8 @@ class TestToDict(TestCase):
 
         to_dict_result = to_dict(packet)
 
-        self.assertTrue(isinstance(to_dict_result, dict))
-        self.assertEqual(to_dict_result, packet_result)
+        assert isinstance(to_dict_result, dict)
+        assert to_dict_result == packet_result
 
     def test_simple_dict_get_second_element(self):
         packet = (
@@ -51,5 +48,5 @@ class TestToDict(TestCase):
 
         to_dict_result = to_dict(packet, layer=1)  # layer 1 is IP
 
-        self.assertTrue(isinstance(to_dict_result, dict))
-        self.assertEqual(to_dict_result, packet_result)
+        assert isinstance(to_dict_result, dict)
+        assert to_dict_result == packet_result
