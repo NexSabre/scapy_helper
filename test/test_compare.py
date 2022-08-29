@@ -1,6 +1,7 @@
 import unittest
 
 from scapy.all import IP, UDP, Ether
+
 from scapy_helper.compare import Compare
 
 

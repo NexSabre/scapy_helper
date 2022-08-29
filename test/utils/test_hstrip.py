@@ -25,7 +25,7 @@ class TestHStrip:
         except PyperclipException:
             return True
 
-        self.assertEqual(hstrip(raw=False), HSTRIP_RESULT)
+        assert hstrip(raw=False) == HSTRIP_RESULT
 
     def test_hstrip_from_hexdump(self):
-        self.assertEqual(hstrip(raw=False, hexdump=HEXDUMP_VALUE), HSTRIP_RESULT)
+        assert hstrip(raw=False, hexdump=HEXDUMP_VALUE) == HSTRIP_RESULT

@@ -1,5 +1,6 @@
 import pytest
 from scapy.all import Ether, Packet
+
 from scapy_helper.main import show_diff
 
 
