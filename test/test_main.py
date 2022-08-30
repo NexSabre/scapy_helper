@@ -6,11 +6,6 @@ from scapy_helper import get_hex, show_diff
 from scapy_helper.main import _prepare, diff, get_diff, hex_equal
 
 
-@pytest.fixture(scope="function")
-def ether() -> Packet:
-    return Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00")
-
-
 def remove_byte_char(frame) -> str:
     return " ".join(
         [

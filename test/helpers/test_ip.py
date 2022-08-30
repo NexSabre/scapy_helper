@@ -1,18 +1,16 @@
-from unittest import TestCase
+import pytest
 
 from scapy_helper.helpers.ip import int2ip, ip2int
 
+INTEGER = 3232235521
+IP = "192.168.0.1"
 
-class TestIP(TestCase):
-    def setUp(self):
-        self.integer = 3232235521
-        self.ip = "192.168.0.1"
 
-    def test_ip2int(self):
-        self.assertEqual(ip2int(self.ip), self.integer, "Values should be equal")
+@pytest.mark.parametrize("value, expected", ((IP, INTEGER), ("0.0.0.0", 0)))
+def test_ip2int(value: str, expected: int) -> None:
+    assert ip2int(value) == expected, "Values should be equal"
 
-    def test_int2ip(self):
-        self.assertEqual(int2ip(self.integer), self.ip, "Values should be equal")
 
-    def test_int2ip_for_zero(self):
-        self.assertEqual(int2ip(0), "0.0.0.0", "Values should be equal")
+@pytest.mark.parametrize("value, expected_string_ip", ((INTEGER, IP), (0, "0.0.0.0")))
+def test_int2ip(value: int, expected_string_ip: str) -> None:
+    assert int2ip(value) == expected_string_ip, "Values should be equal"

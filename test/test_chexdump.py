@@ -1,12 +1,6 @@
-import pytest
 from scapy.all import Ether, Packet  # type: ignore
 
 from scapy_helper.chexdump import chexdump
-
-
-@pytest.fixture(scope="function")
-def ether() -> Packet:
-    return Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00")
 
 
 class TestCHexdump:

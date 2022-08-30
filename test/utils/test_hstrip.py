@@ -1,4 +1,4 @@
-from pyperclip import PyperclipException  # type: ignore
+import pyperclip  # type: ignore
 
 from scapy_helper.utils.hstrip import hstrip
 
@@ -17,16 +17,14 @@ HSTRIP_RESULT = (
 )
 
 
-class TestHStrip:
-    def test_hstrip(self):
-        import pyperclip  # type: ignore
+def test_hstrip():
+    try:
+        pyperclip.copy(HEXDUMP_VALUE)
+    except pyperclip.PyperclipException:
+        return True
 
-        try:
-            pyperclip.copy(HEXDUMP_VALUE)
-        except PyperclipException:
-            return True
+    assert hstrip(raw=False) == HSTRIP_RESULT
 
-        assert hstrip(raw=False) == HSTRIP_RESULT
 
-    def test_hstrip_from_hexdump(self):
-        assert hstrip(raw=False, hexdump=HEXDUMP_VALUE) == HSTRIP_RESULT
+def test_hstrip_from_hexdump():
+    assert hstrip(raw=False, hexdump=HEXDUMP_VALUE) == HSTRIP_RESULT
