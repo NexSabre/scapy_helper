@@ -130,7 +130,7 @@ def __process_char(char: Optional[str] = "") -> str:
 
 def show_diff(
     first, second, index: bool = False, extend: bool = False, empty_char: str = "XX"
-) -> None:
+) -> bool:
     def get_name(module):
         if isinstance(module, str):
             return "hex"

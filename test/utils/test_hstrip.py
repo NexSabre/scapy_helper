@@ -1,4 +1,5 @@
 from pyperclip import PyperclipException  # type: ignore
+
 from scapy_helper.utils.hstrip import hstrip
 
 HEXDUMP_VALUE = """

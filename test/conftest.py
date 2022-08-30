@@ -1,5 +1,5 @@
 import pytest
-from scapy.all import Ether, Packet
+from scapy.all import Ether, Packet  # type: ignore
 
 
 @pytest.fixture
