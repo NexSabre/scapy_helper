@@ -1,4 +1,4 @@
-from scapy.all import IP, TCP, Ether
+from scapy.all import IP, TCP, Ether  # type: ignore
 
 from scapy_helper import to_list
 

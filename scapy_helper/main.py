@@ -1,10 +1,10 @@
 import sys
-from typing import Any, Optional
+from typing import Any, List, Optional, Tuple
 
 from scapy_helper.helpers.depracated import deprecated
 
 
-def diff(*args, **kwargs):
+def diff(*args, **kwargs) -> Tuple[List[Any], List[Any], List[int]]:
     """
     Return a diff between two hex list
     :param args:
@@ -17,7 +17,7 @@ def diff(*args, **kwargs):
     if len(args) != 2:
         raise NotImplementedError("Only comparison of the two list are supported")
 
-    result_list = ([], [])
+    result_list: Tuple[List[Any], List[Any]] = ([], [])
     diff_indexes = []
     diff_list = []
 
@@ -57,8 +57,8 @@ def _fill_empty_elements(first, second) -> None:
     return None
 
 
-def _prepare(obj):
-    def isbytesarray():
+def _prepare(obj) -> List[str]:
+    def is_byte_array() -> List[str]:
         b = obj.split()
         if len(b) == 1:
             return get_hex(obj).split()
@@ -67,13 +67,13 @@ def _prepare(obj):
     if sys.version_info > (3, 5):
         # TODO very naive hack, but should be ok as temporary fix
         if isinstance(obj, bytes):
-            return isbytesarray()
+            return is_byte_array()
     if hasattr(obj, "hex"):
         return obj.hex().split()
     if not isinstance(obj, str):
         obj = get_hex(obj)
     if isinstance(obj, str):
-        obj = isbytesarray()
+        obj = is_byte_array()
     return obj
 
 
@@ -250,7 +250,7 @@ def count_bytes(packet_hex_list):
     return len([x for x in packet_hex_list if x != "  "])
 
 
-def hex_equal(first, second, show_inequalities=True, **kwargs):
+def hex_equal(first, second, show_inequalities=True, **kwargs) -> bool:
     """
     Compare a two hex or hex-able Scapy objects. Return a True if objects are equal
     :param first: str hex or Scapy object
@@ -261,20 +261,20 @@ def hex_equal(first, second, show_inequalities=True, **kwargs):
     """
     _, _, status = diff(first, second)
     if show_inequalities and status:
-        show_diff(first, second, **kwargs)
+        _ = show_diff(first, second, **kwargs)
     # diff returns a list of position on which the object is different
-    # if status is a empty Tuple, there's no difference between objects
+    # if status is empty Tuple, there's no difference between objects
     if status:
         return False
     return True
 
 
-def get_diff(first, second):
+def get_diff(first, second) -> Tuple[List[Any], List[Any], List[int]]:
     """This function is the wrapper for the diff. For backward compatibility"""
     return diff(first, second)
 
 
-def get_diff_status(first, second):
+def get_diff_status(first, second) -> List[int]:
     _, _, status = diff(first, second)
     return status
 

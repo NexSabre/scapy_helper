@@ -7,7 +7,7 @@ class TestCHexdump:
     def test_chexdump(self) -> None:
         # TODO Add a verification of the output
         packet = "\x00\x01".encode()
-        chexdump(packet)
+        assert not chexdump(packet)
 
     def test_chexdump_dump_true(self, ether: Packet) -> None:
         expected_result = "0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x90, 0x00"

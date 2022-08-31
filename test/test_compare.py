@@ -1,6 +1,6 @@
 import unittest
 
-from scapy.all import IP, UDP, Ether
+from scapy.all import IP, UDP, Ether  # type: ignore
 
 from scapy_helper.compare import Compare
 

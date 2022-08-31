@@ -1,5 +1,4 @@
-import pytest
-from scapy.all import Ether, Packet
+from scapy.all import Ether, Packet  # type: ignore
 
 from scapy_helper.main import show_diff
 
@@ -36,8 +35,8 @@ class TestShowDiff:
 
     def test_show_diff_with_indexes_and_custom_char_none(self, ether: Packet):
         ether_2 = "ff ff fc ff ff fa 00 11 11 11 11 11 90 00 11 11 00 22"
-        show_diff(ether, ether_2, index=True, empty_char=None)
+        show_diff(ether, ether_2, index=True, empty_char="")
 
     def test_show_diff_with_indexes_proper_len_of_last_position(self, ether: Packet):
         ether_2 = "ff ff fc ff ff fa 00 11 11 11 11 11 90 00"
-        show_diff(ether, ether_2, index=True, empty_char=None)
+        show_diff(ether, ether_2, index=True, empty_char="")

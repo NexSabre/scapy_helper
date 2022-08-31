@@ -1,9 +1,11 @@
-from typing import List, Optional, Union
+from typing import Any, List, Optional, Union
 
 from scapy_helper.main import _prepare
 
 
-def chexdump(packet, dump=False, to_list=False) -> Optional[Union[List[str], str]]:
+def chexdump(
+    packet: Any, dump: bool = False, to_list: bool = False
+) -> Optional[Union[List[str], str]]:
     """
     Return a chexdump base on packet
     :param packet: String or Scapy object
@@ -12,7 +14,7 @@ def chexdump(packet, dump=False, to_list=False) -> Optional[Union[List[str], str
     :return: None or Str or List
     """
 
-    def _add_0x_before(p):
+    def _add_0x_before(p: List[str]) -> List[str]:
         return ["0x%s" % x for x in p]
 
     processed_packet = _prepare(packet)

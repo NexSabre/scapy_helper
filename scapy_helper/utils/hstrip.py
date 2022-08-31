@@ -1,4 +1,5 @@
 from os import getenv
+from typing import Optional
 
 try:
     import pyperclip  # type: ignore
@@ -13,7 +14,7 @@ HEXDUMP_VALUE = """
 """
 
 
-def hstrip(raw=True, hexdump=None):
+def hstrip(raw: bool = True, hexdump=None) -> Optional[str]:
     """
     Clean a Scapies hexdump into more friendly "oneliner"
     :param raw: If False, return oneliner
@@ -36,7 +37,7 @@ def hstrip(raw=True, hexdump=None):
         index_to_start = int(striped_value[0].index("0000"))
     except ValueError:
         print("Something went wrong. Do you copy entire fragment of hexdump?")
-        return
+        return None
 
     _list = []
     for x in striped_value:

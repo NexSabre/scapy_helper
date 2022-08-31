@@ -27,7 +27,7 @@ test:
 
 .PHONY: test-mypy
 test-mypy:
-	python -m mypy scapy_helper/
+	python -m mypy scapy_helper/ test/
 
 .PHONY: version
 version:
