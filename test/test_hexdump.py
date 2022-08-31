@@ -1,4 +1,4 @@
-from test._utils import normalize
+from test._utils import normalize, normalize_and_split
 
 import pytest
 from scapy.all import IP, Ether, Packet  # type: ignore
@@ -61,10 +61,10 @@ class TestHexdump:
         ), "Dump of the hex should be the same"
 
     def test_hexdump_dump_true_as_list(self, ether_ip: Packet):
-        expected_result = scapy_hexdump(ether_ip, dump=True).replace(" ", "").split("\n")
+        expected_result = scapy_hexdump(ether_ip, dump=True)
         result = [normalize(x) for x in hexdump(ether_ip, dump=True, to_list=True)]
 
-        expected_result = [x.lower() for x in expected_result]
+        expected_result = [x.lower() for x in normalize_and_split(expected_result)]
         result = [x.lower() for x in result]
 
         assert isinstance(result, list), "Dump should be a list"
