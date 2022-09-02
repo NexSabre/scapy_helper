@@ -48,17 +48,15 @@ class TestHexdump:
         string = "\x00\x01".encode()
         expected_result = "00000001.."
 
-        result = hexdump(string, dump=True).replace(" ", "")
+        result = normalize(hexdump(string, dump=True))
         assert result == expected_result, "Dump of hex should be the same"
 
     def test_hexdump_dump_true(self, ether_ip: Packet):
-        expected_result = normalize(scapy_hexdump(ether_ip, dump=True))
-        result = normalize(hexdump(ether_ip, dump=True))
+        expected_result = normalize(scapy_hexdump(ether_ip, dump=True), lowercase=True)
+        result = normalize(hexdump(ether_ip, dump=True), lowercase=True)
 
         assert isinstance(result, str), "Dump should be a string"
-        assert (
-            expected_result.lower() == result.lower()
-        ), "Dump of the hex should be the same"
+        assert expected_result == result, "Dump of the hex should be the same"
 
     def test_hexdump_dump_true_as_list(self, ether_ip: Packet):
         expected_result = scapy_hexdump(ether_ip, dump=True)

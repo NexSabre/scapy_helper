@@ -21,6 +21,7 @@ def test_hstrip():
     try:
         pyperclip.copy(HEXDUMP_VALUE)
     except pyperclip.PyperclipException:
+        # some CI's block access to the clipboard
         return True
 
     assert hstrip(raw=False) == HSTRIP_RESULT

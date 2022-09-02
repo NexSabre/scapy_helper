@@ -39,14 +39,9 @@ def hstrip(raw: bool = True, hexdump=None) -> Optional[str]:
         print("Something went wrong. Do you copy entire fragment of hexdump?")
         return None
 
-    _list = []
-    for x in striped_value:
-        _list.append(x[index_to_start + 1 : index_to_start + 17])
-    else:
-        if len(_list[-1]) < 18:
-            _list[-1] = _list[-1][
-                :-1
-            ]  # remove last element if the list is shorter than 18
+    _list = [x[index_to_start + 1 : index_to_start + 17] for x in striped_value]
+    if len(_list[-1]) < 18:
+        _list[-1] = _list[-1][:-1]  # remove last element if the list is shorter than 18
 
     oneliner = " ".join([" ".join(x) for x in _list])
     if not hexdump:

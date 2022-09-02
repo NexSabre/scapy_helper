@@ -67,7 +67,10 @@ class Compare:
         """
         f_details = self.first.show(dump=True).split("\n")
         s_details = self.second.show(dump=True).split("\n")
-        data = [("Diff or header", "Element", "First", "Second")]
-        for r in range(len(f_details)):
-            data.append(prepare_data(f_details[r], s_details[r]))
-        print(tabulate(data, headers="firstrow", tablefmt="github"))
+
+        data = ("Diff or header", "Element", "First", "Second")
+        details_data = [
+            prepare_data(f_details[r], s_details[r]) for r in range(len(f_details))
+        ]
+
+        print(tabulate([data, *details_data], headers="firstrow", tablefmt="github"))

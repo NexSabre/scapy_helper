@@ -17,14 +17,11 @@ def diff(*args, **kwargs) -> Tuple[List[Any], List[Any], List[int]]:
     if len(args) != 2:
         raise NotImplementedError("Only comparison of the two list are supported")
 
-    result_list: Tuple[List[Any], List[Any]] = ([], [])
-    diff_indexes = []
-    diff_list = []
-
-    for a in args:
-        diff_list.append(_prepare(a))
+    diff_list = [_prepare(a) for a in args]
     _fill_empty_elements(*diff_list)
 
+    diff_indexes = []
+    result_list: Tuple[List[Any], List[Any]] = ([], [])
     for e, _ in enumerate(diff_list[0]):
         if diff_list[0][e].lower() != diff_list[1][e].lower():
             for i in range(2):
@@ -88,13 +85,12 @@ def get_hex(frame: Any, uppercase: bool = False) -> str:
         str_hex = bytes(frame).hex()
     except TypeError:
         str_hex = bytes(frame, encoding="utf-8").hex()
-    j = []
-    for e, _ in enumerate(str_hex):
-        if e % 2:
-            j.append(str_hex[e - 1] + str_hex[e])
+    hex_list: List[str] = [
+        str_hex[e - 1] + str_hex[e] for e, _ in enumerate(str_hex) if e % 2
+    ]
     if uppercase:
-        return " ".join(j).upper()
-    return " ".join(j).lower()
+        return " ".join(hex_list).upper()
+    return " ".join(hex_list).lower()
 
 
 def show_hex(frame, uppercase: bool = False) -> None:
