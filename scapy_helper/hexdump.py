@@ -1,25 +1,27 @@
+from typing import Any, Union, List, Optional
+
 from scapy_helper.main import _prepare, get_hex
 
 
-def hexdump(packet, dump=False, to_list=False):
-    def to_number(number):
+def hexdump(packet, dump=False, to_list=False) -> Optional[Union[str, list[str]]]:
+    def to_number(number: Union[str, int]) -> int:
         return number if isinstance(number, int) else ord(number)
 
-    def to_char(string):
+    def to_char(string: Union[str, int]) -> str:
         j = to_number(string)
         if (j < 32) or (j >= 127):
             return "."
         else:
             return chr(j)
 
-    def split(obj, num):
+    def split(obj, num) -> List[Any]:
         return [
             obj[start : start + num]
             for start in range(0, len(obj), num)
             if obj[start : start + num]
         ]
 
-    def __process_hexdump(ppacket):
+    def __process_hexdump(ppacket: Any) -> List[str]:
         row = []
         for i, line in enumerate(split(ppacket, 16)):
             console_char = [to_char(int(x, 16)) for x in line]
@@ -29,7 +31,7 @@ def hexdump(packet, dump=False, to_list=False):
             row.append("%03x0   %s   %s" % (i, " ".join(line), "".join(console_char)))
         return row
 
-    def __alternative_process_hexdump(ppacket):
+    def __alternative_process_hexdump(ppacket: Any) -> List[str]:
         row = []
         for i, line in enumerate(split(ppacket, 16)):
             console_char = [to_char(x) for x in line]
@@ -39,7 +41,7 @@ def hexdump(packet, dump=False, to_list=False):
             row.append("%03x0   %s   %s" % (i, " ".join(line), "".join(console_char)))
         return row
 
-    def __third_process_hexdump(ppacket):
+    def __third_process_hexdump(ppacket: Any) -> List[str]:
         row = []
         for i, line in enumerate(split(ppacket, 16)):
             console_char = [to_char(x) for x in line]
@@ -48,17 +50,18 @@ def hexdump(packet, dump=False, to_list=False):
             row.append("%03x0   %s   %s" % (i, " ".join(line), "".join(console_char)))
         return row
 
+    processed_packet: Union[str, list[str]]
     try:
         processed_packet = _prepare(packet)
         if not processed_packet:
-            return
+            return None
         rows = __process_hexdump(processed_packet)
     except ValueError:
-        # It's not a ideal workaround for detecting a proper
+        # It's not an ideal workaround for detecting a proper
         # format of input, but works on Py2 & Py3
         processed_packet = get_hex(packet)
         if not processed_packet:
-            return
+            return None
         try:
             rows = __alternative_process_hexdump(processed_packet)
         except TypeError:
@@ -68,3 +71,4 @@ def hexdump(packet, dump=False, to_list=False):
             return rows
         return "\n".join(rows).rstrip("\n")
     print("\n".join(rows).rstrip("\n"))
+    return None

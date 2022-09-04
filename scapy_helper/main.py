@@ -99,7 +99,7 @@ def show_hex(frame, uppercase: bool = False) -> None:
     return None
 
 
-def _create_diff_indexes_list(indexes, max_len):
+def _create_diff_indexes_list(indexes, max_len) -> str:
     new_list = []
 
     for idx in range(max_len):
@@ -194,7 +194,7 @@ def show_diff(
     return False
 
 
-def show_diff_full(first, second, index=True, extend=False, empty_char="XX"):
+def show_diff_full(first, second, index=True, extend=False, empty_char="XX") -> bool:
     first_row, second_row, indexes_of_diff = diff(first, second, skip_if_same=False)
     first_row_len_bytes = count_bytes(first_row)
     second_row_len_bytes = count_bytes(second_row)
@@ -242,7 +242,7 @@ def show_diff_full(first, second, index=True, extend=False, empty_char="XX"):
     return False
 
 
-def count_bytes(packet_hex_list):
+def count_bytes(packet_hex_list) -> int:
     return len([x for x in packet_hex_list if x != "  "])
 
 
@@ -276,7 +276,7 @@ def get_diff_status(first, second) -> List[int]:
 
 
 @deprecated
-def table(first, second):
+def table(first, second) -> List[int]:
     _, _, status = diff(first, second)
     show_diff(first, second)
     f_details = first.show(dump=True).split("\n")
