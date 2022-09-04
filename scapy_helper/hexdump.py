@@ -1,4 +1,4 @@
-from typing import Any, Union, List, Optional
+from typing import Any, List, Optional, Union
 
 from scapy_helper.main import _prepare, get_hex
 
