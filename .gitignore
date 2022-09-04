@@ -7,3 +7,5 @@ scapy_helper.egg-info/*
 __pycache__/*
 **/__pycache__
 venv*/
+.pytest_cache/*
+.mypy_cache/*

@@ -8,39 +8,40 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: |
-          pip install black[python27] isort
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
       - name: Verify code
         run: |
-          black --check -t py27 .
+          black --check -t py36 .
   build:
     name: Build & test with Py
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [2.7, 3.5, 3.9]
+        python-version: [3.6, 3.7, 3.8, 3.9, "3.10"]
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install flake8 scapy
-        if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude .git,__pycache__,build,dist
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude .git,__pycache__,build,dist
-    - name: Test with pytest
-      run: |
-        python -m unittest discover test/
-    - name: Build a wheel package
-      run: |
-        python -m pip install setuptools wheel && python setup.py sdist bdist_wheel
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install scapy==2.4.5
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+      - name: Lint with flake8
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude .git,__pycache__,build,dist
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude .git,__pycache__,build,dist
+      - name: Test with unittest
+        run: |
+          make test
+      - name: Build a wheel package
+        run: |
+          python -m pip install setuptools wheel && python setup.py sdist bdist_wheel
   check_version:
     name: Check local version with the available at pypi.org
     runs-on: ubuntu-latest

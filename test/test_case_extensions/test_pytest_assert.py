@@ -46,8 +46,10 @@ class TestPytestAssert(TestCase):
         with self.assertRaises(AssertionError):
             assert_hex_len_not_equal(DEFAULT_HEX, DEFAULT_HEX)
 
+    # TODO add
     # def test_assert_bytes_equal(self):
     #     self.fail()
-    #
+
+    # TODO add
     # def test_assert_bytes_not_equal(self):
     #     self.fail()

@@ -1,9 +1,10 @@
 import sys
+from typing import Any, List, Optional, Tuple
 
 from scapy_helper.helpers.depracated import deprecated
 
 
-def diff(*args, **kwargs):
+def diff(*args, **kwargs) -> Tuple[List[Any], List[Any], List[int]]:
     """
     Return a diff between two hex list
     :param args:
@@ -16,14 +17,11 @@ def diff(*args, **kwargs):
     if len(args) != 2:
         raise NotImplementedError("Only comparison of the two list are supported")
 
-    result_list = ([], [])
-    diff_indexes = []
-    diff_list = []
-
-    for a in args:
-        diff_list.append(_prepare(a))
+    diff_list = [_prepare(a) for a in args]
     _fill_empty_elements(*diff_list)
 
+    diff_indexes = []
+    result_list: Tuple[List[Any], List[Any]] = ([], [])
     for e, _ in enumerate(diff_list[0]):
         if diff_list[0][e].lower() != diff_list[1][e].lower():
             for i in range(2):
@@ -39,7 +37,7 @@ def diff(*args, **kwargs):
     return result_list[0], result_list[1], diff_indexes
 
 
-def _fill_empty_elements(first, second):
+def _fill_empty_elements(first, second) -> None:
     if len(first) != len(second):
         print("WARN:: Frame len is not the same")
 
@@ -47,67 +45,61 @@ def _fill_empty_elements(first, second):
         len_second = len(second)
         if len_first > len_second:
             print("WARN:: First row is longer by the %sB\n" % (len_first - len_second))
-            for x in range(len_first - len_second):
+            for _ in range(len_first - len_second):
                 second.append("  ")
         else:
             print("WARN:: Second row is longer by the %sB\n" % (len_second - len_first))
-            for x in range(len_second - len_first):
+            for _ in range(len_second - len_first):
                 first.append("  ")
+    return None
 
 
-def _prepare(obj):
-    def isbytesarray():
+def _prepare(obj) -> List[str]:
+    def is_byte_array() -> List[str]:
         b = obj.split()
         if len(b) == 1:
             return get_hex(obj).split()
         return b
 
-    import sys
-
     if sys.version_info > (3, 5):
         # TODO very naive hack, but should be ok as temporary fix
         if isinstance(obj, bytes):
-            return isbytesarray()
+            return is_byte_array()
     if hasattr(obj, "hex"):
         return obj.hex().split()
     if not isinstance(obj, str):
         obj = get_hex(obj)
     if isinstance(obj, str):
-        obj = isbytesarray()
+        obj = is_byte_array()
     return obj
 
 
-def get_hex(frame, uppercase=False):
+def get_hex(frame: Any, uppercase: bool = False) -> str:
     """
     Return a string object of Hex representation of the Scapy's framework
     :param frame: Scapy's Packet Object
     :param uppercase: bool: If True letters be UPPERCASE
     :return: str: Hex
     """
-    if sys.version_info.major == 2:
-        import binascii
-
-        str_hex = binascii.b2a_hex(bytes(frame))
-    else:
-        try:
-            str_hex = bytes(frame).hex()
-        except TypeError:
-            str_hex = bytes(frame, encoding="utf-8").hex()
-    j = []
-    for e, i in enumerate(str_hex):
-        if e % 2:
-            j.append(str_hex[e - 1] + str_hex[e])
+    try:
+        str_hex = bytes(frame).hex()
+    except TypeError:
+        str_hex = bytes(frame, encoding="utf-8").hex()
+    hex_list: List[str] = [
+        str_hex[e - 1] + str_hex[e] for e, _ in enumerate(str_hex) if e % 2
+    ]
     if uppercase:
-        return " ".join(j).upper()
-    return " ".join(j).lower()
+        return " ".join(hex_list).upper()
+    return " ".join(hex_list).lower()
 
 
-def show_hex(frame, uppercase=False):
+def show_hex(frame, uppercase: bool = False) -> None:
     """Print a hex representation of the Scapy's object"""
     print(get_hex(frame, uppercase=uppercase))
+    return None
 
 
-def _create_diff_indexes_list(indexes, max_len):
+def _create_diff_indexes_list(indexes, max_len) -> str:
     new_list = []
 
     for idx in range(max_len):
@@ -125,14 +117,16 @@ def _create_diff_indexes_list(indexes, max_len):
     return " ".join(new_list)
 
 
-def __process_char(char):
+def __process_char(char: Optional[str] = "") -> str:
     multiplier = 2
     if not char or not isinstance(char, str):
         return "X" * multiplier
     return char[0] * multiplier
 
 
-def show_diff(first, second, index=False, extend=False, empty_char="XX"):
+def show_diff(
+    first, second, index: bool = False, extend: bool = False, empty_char: str = "XX"
+) -> bool:
     def get_name(module):
         if isinstance(module, str):
             return "hex"
@@ -200,7 +194,7 @@ def show_diff(first, second, index=False, extend=False, empty_char="XX"):
     return False
 
 
-def show_diff_full(first, second, index=True, extend=False, empty_char="XX"):
+def show_diff_full(first, second, index=True, extend=False, empty_char="XX") -> bool:
     first_row, second_row, indexes_of_diff = diff(first, second, skip_if_same=False)
     first_row_len_bytes = count_bytes(first_row)
     second_row_len_bytes = count_bytes(second_row)
@@ -248,11 +242,11 @@ def show_diff_full(first, second, index=True, extend=False, empty_char="XX"):
     return False
 
 
-def count_bytes(packet_hex_list):
+def count_bytes(packet_hex_list) -> int:
     return len([x for x in packet_hex_list if x != "  "])
 
 
-def hex_equal(first, second, show_inequalities=True, **kwargs):
+def hex_equal(first, second, show_inequalities=True, **kwargs) -> bool:
     """
     Compare a two hex or hex-able Scapy objects. Return a True if objects are equal
     :param first: str hex or Scapy object
@@ -263,27 +257,27 @@ def hex_equal(first, second, show_inequalities=True, **kwargs):
     """
     _, _, status = diff(first, second)
     if show_inequalities and status:
-        show_diff(first, second, **kwargs)
+        _ = show_diff(first, second, **kwargs)
     # diff returns a list of position on which the object is different
-    # if status is a empty Tuple, there's no difference between objects
+    # if status is empty Tuple, there's no difference between objects
     if status:
         return False
     return True
 
 
-def get_diff(first, second):
+def get_diff(first, second) -> Tuple[List[Any], List[Any], List[int]]:
     """This function is the wrapper for the diff. For backward compatibility"""
     return diff(first, second)
 
 
-def get_diff_status(first, second):
+def get_diff_status(first, second) -> List[int]:
     _, _, status = diff(first, second)
     return status
 
 
 @deprecated
-def table(first, second):
-    f, s, status = diff(first, second)
+def table(first, second) -> List[int]:
+    _, _, status = diff(first, second)
     show_diff(first, second)
     f_details = first.show(dump=True).split("\n")
     s_details = second.show(dump=True).split("\n")

@@ -1,6 +1,4 @@
-from unittest import TestCase
-
-from pyperclip import PyperclipException
+import pyperclip  # type: ignore
 
 from scapy_helper.utils.hstrip import hstrip
 
@@ -19,16 +17,15 @@ HSTRIP_RESULT = (
 )
 
 
-class TestHStrip(TestCase):
-    def test_hstrip(self):
-        import pyperclip
+def test_hstrip():
+    try:
+        pyperclip.copy(HEXDUMP_VALUE)
+    except pyperclip.PyperclipException:
+        # some CI's block access to the clipboard
+        return True
 
-        try:
-            pyperclip.copy(HEXDUMP_VALUE)
-        except PyperclipException:
-            return True
+    assert hstrip(raw=False) == HSTRIP_RESULT
 
-        self.assertEqual(hstrip(raw=False), HSTRIP_RESULT)
 
-    def test_hstrip_from_hexdump(self):
-        self.assertEqual(hstrip(raw=False, hexdump=HEXDUMP_VALUE), HSTRIP_RESULT)
+def test_hstrip_from_hexdump():
+    assert hstrip(raw=False, hexdump=HEXDUMP_VALUE) == HSTRIP_RESULT

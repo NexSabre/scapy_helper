@@ -1,8 +1,7 @@
 from unittest import TestCase
 
 from mock import MagicMock
-from scapy.layers.inet import IP
-from scapy.layers.l2 import Ether
+from scapy.all import IP, Ether  # type: ignore
 
 from scapy_helper.test_case_extensions.packet_assert import PacketAssert
 

@@ -1,7 +1,7 @@
 from scapy_helper.utils.hstrip import hstrip
 
 
-def hhstrip(*args, **kwargs):
+def hhstrip(*args, **kwargs) -> None:
     try:
         one_line_hex = hstrip(raw=False)
         if one_line_hex:

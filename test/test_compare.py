@@ -1,13 +1,12 @@
 import unittest
 
-from scapy.layers.inet import IP, UDP
-from scapy.layers.l2 import Ether
+from scapy.all import IP, UDP, Ether  # type: ignore
 
 from scapy_helper.compare import Compare
 
 
 class TestCompare(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.ether = (
             Ether(dst="ff:ff:ff:ff:ff:ff", src="00:00:00:00:00:00")
             / IP(src="192.168.1.1", dst="192.168.1.20", ttl=15)
@@ -21,10 +20,10 @@ class TestCompare(unittest.TestCase):
 
         self.compare = Compare(self.ether, self.c_ether)
 
-    def test_table_diff(self):
+    def test_table_diff(self) -> None:
         self.compare.table_diff()
 
-    def test_hex(self):
+    def test_hex(self) -> None:
         self.assertEqual(
             self.compare.hex(),
             (
@@ -37,8 +36,10 @@ class TestCompare(unittest.TestCase):
             ),
         )
 
-    def test_diff(self):
+    def test_diff(self) -> None:
+        # FIXME use a pytest and check that function was called
         self.assertTrue(self.compare.diff(), "diff() should return a difference")
 
-    def test_equal(self):
+    def test_equal(self) -> None:
+        # FIXME use a pytest and check that function was called
         self.assertFalse(self.compare.equal(), "equal() should return false")
