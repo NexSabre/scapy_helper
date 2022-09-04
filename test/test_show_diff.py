@@ -1,9 +1,18 @@
 from scapy.all import Ether, Packet  # type: ignore
 
 from scapy_helper.main import show_diff
+from scapy_helper.test_case_extensions.assert_print import assert_print
 
 
 class TestShowDiff:
+    @assert_print(
+        results=(
+            "scapy | ff ff ff ff ff ff __ __ __ __ __ __ __ __ | len: 14B\n"
+            "scapy | 00 11 00 00 00 00 __ __ __ __ __ __ __ __ | len: 14B\n"
+            "\n"
+            "Not equal at 6B's\n"
+        )
+    )
     def test_show_diff(self, ether: Packet):
         ether_2 = Ether(dst="00:11:00:00:00:00")
         show_diff(ether, ether_2)
